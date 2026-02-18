@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="./fishCoach.css" />
 
   <style>
+    :root { --headerH: 72px; }
+
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -20,6 +22,7 @@
     }
 
     header{
+      height: var(--headerH);
       display:flex;
       justify-content:space-between;
       align-items:center;
@@ -27,6 +30,9 @@
       border-bottom: 1px solid rgba(255,255,255,0.12);
       background: rgba(0,0,0,0.25);
       backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }
 
     .brand{
@@ -190,12 +196,11 @@
     <section class="panel">
       <div class="muted">
         This is a sketch page for the capstone. The main feature is the <b>Fish Coach feedback</b>
-        after each decision. Click any option below to test the coach overlay + typing sound.
+        after each decision. Click any option below to test the coach overlay + typing + win/lose SFX.
       </div>
     </section>
 
     <div class="row">
-      <!-- Left: Scenario -->
       <section class="panel">
         <div class="scenarioCard">
           <div class="scenarioHeader">
@@ -227,26 +232,22 @@
         </div>
       </section>
 
-      <!-- Right: no image while solving -->
       <section class="panel side">
         <div class="tip">
-          ✅ The fish coach is hidden while players solve.<br>
-          ✅ It appears only during feedback (after a decision).<br><br>
-          <div class="muted">
-            This keeps attention on the scenario, then teaches after the choice.
-          </div>
+          ✅ Fish is hidden while players solve.<br>
+          ✅ Fish appears full-screen style during feedback.<br>
+          ✅ Bubble stays at top so it won’t cover fish or man.
         </div>
       </section>
     </div>
   </main>
 
-  <!-- Coach overlay markup -->
-  <div id="fishCoachOverlay" class="fish-overlay hidden">
-    <div class="fish-container">
+  <!-- Coach overlay -->
+  <div id="fishCoachOverlay" class="fish-overlay hidden" aria-hidden="true">
+    <div class="fish-fullscreen">
 
       <div class="fish-image-wrapper">
         <img src="./Fish%20game%20char.png" alt="Fish Coach" class="fish-image">
-
         <div class="speech-bubble">
           <div id="fishText"></div>
         </div>
