@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Master Bait — Game Sketch</title>
+
+  <link rel="stylesheet" href="./fishCoach.css" />
+
+  <style>
+    /* Quick sketch styling (keep simple for now) */
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: rgba(255,255,255,0.92);
+      background:
+        radial-gradient(900px 560px at 20% 10%, rgba(168,85,247,0.20), transparent 60%),
+        radial-gradient(900px 560px at 80% 70%, rgba(56,189,248,0.14), transparent 65%),
+        #070711;
+      min-height:100vh;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:
+        radial-gradient(circle at 30% 20%, rgba(168,85,247,0.9), rgba(0,0,0,0.2)),
+        radial-gradient(circle at 70% 80%, rgba(56,189,248,0.8), transparent 60%);
+    }
+
+    .title{ font-weight:1000; letter-spacing:0.14em; }
+    .subtitle{ opacity:0.7; font-size:12px; margin-top:2px; }
+
+    .hud{
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-weight:900;
+      font-size:12px;
+    }
+
+    .pill{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+    }
+
+    main{
+      width: min(1100px, 95vw);
+      margin: 18px auto;
+      display:grid;
+      gap: 14px;
+    }
+
+    .panel{
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 900px){
+      .row{ grid-template-columns: 1fr; }
+    }
+
+    .scenarioCard{
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.25);
+      border-radius: 18px;
+      padding: 14px;
+      display:grid;
+      gap: 10px;
+    }
+
+    .scenarioHeader{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    .level{
+      font-weight: 1000;
+      font-size: 18px;
+      letter-spacing:0.04em;
+    }
+
+    .tag{
+      font-size: 12px;
+      opacity: 0.75;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      white-space: nowrap;
+    }
+
+    .msg{
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      border-radius: 16px;
+      padding: 12px;
+      line-height: 1.45;
+    }
+
+    .muted{ opacity: 0.7; }
+
+    .btnRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+
+    .btn{
+      cursor:pointer;
+      border:none;
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-weight: 1000;
+      background: linear-gradient(135deg, rgba(168,85,247,0.95), rgba(56,189,248,0.75));
+      color: rgba(0,0,0,0.85);
+    }
+    .btn:hover{ filter:brightness(1.08); }
+
+    .btn.good{
+      background: linear-gradient(135deg, rgba(52,211,153,0.95), rgba(56,189,248,0.65));
+    }
+    .btn.ok{
+      background: linear-gradient(135deg, rgba(56,189,248,0.85), rgba(168,85,247,0.65));
+    }
+    .btn.bad{
+      background: linear-gradient(135deg, rgba(251,113,133,0.95), rgba(251,146,60,0.65));
+    }
+
+    .side{
+      display:grid;
+      gap: 14px;
+    }
+
+    .miniCoachPreview{
+      display:grid;
+      gap: 10px;
+      align-items:center;
+      justify-items:center;
+      text-align:center;
+    }
+
+    .miniCoachPreview img{
+      width: 100%;
+      max-width: 360px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 14px 50px rgba(0,0,0,0.45);
+    }
+
+    .tip{
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.22);
+      border-radius: 16px;
+      padding: 12px;
+      font-weight: 900;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo"></div>
+      <div>
+        <div class="title">MASTER BAIT</div>
+        <div class="subtitle">Game Sketch — Fish Coach Feedback Focus</div>
+      </div>
+    </div>
+
+    <div class="hud">
+      <div class="pill">XP: <span id="xp">0</span></div>
+      <div class="pill">Streak: <span id="streak">0</span>🔥</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="muted">
+        This is a sketch page for the capstone. The main feature is the <b>Fish Coach feedback</b>
+        after each decision. Click any option below to test the coach overlay + typing sound.
+      </div>
+    </section>
+
+    <div class="row">
+      <!-- Left: Scenario -->
+      <section class="panel">
+        <div class="scenarioCard">
+          <div class="scenarioHeader">
+            <div>
+              <div class="level">Level 1 — Email: “Account Locked”</div>
+              <div class="muted">Goal: spot urgency + suspicious link + odd sender domain.</div>
+            </div>
+            <div class="tag">Type: Email</div>
+          </div>
+
+          <div class="msg">
+            <b>From:</b> IT Support &lt;support@micros0ft-secure-login.com&gt;<br>
+            <b>Subject:</b> URGENT: Your account will be disabled in 30 minutes<br><br>
+            Hello, we detected unusual activity. Click below to verify your account immediately:<br>
+            <span class="muted">http://micros0ft-secure-login.com/verify</span><br><br>
+            Thanks,<br>
+            Billing Team
+          </div>
+
+          <div class="btnRow">
+            <button class="btn good" id="btnReport">REPORT (Perfect)</button>
+            <button class="btn ok" id="btnCall">CALL IT (Good)</button>
+            <button class="btn bad" id="btnClick">CLICK LINK (Bad)</button>
+          </div>
+
+          <div class="muted">
+            Note: This is just a sketch. Later, you’ll replace this with real level data and UI.
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Coach preview -->
+      <section class="panel side">
+        <div class="miniCoachPreview">
+          <div class="muted"><b>Coach Art Preview</b> (uses your real file name)</div>
+          <img src="./Fish%20game%20char.png" alt="Fish Coach Preview">
+          <div class="tip">Coach = teach + congratulate + explain red flags after each decision.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Coach overlay markup -->
+  <div id="fishCoachOverlay" class="fish-overlay hidden">
+    <div class="fish-container">
+
+      <div class="fish-image-wrapper">
+        <img src="./Fish%20game%20char.png" alt="Fish Coach" class="fish-image">
+        <div class="speech-bubble">
+          <div id="fishText"></div>
+        </div>
+      </div>
+
+      <div class="fish-panel">
+        <h2 id="fishTitle">Feedback</h2>
+        <div id="fishLessons"></div>
+        <button id="fishCloseBtn">Continue</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="./fishCoach.js"></script>
+
+  <script>
+    // Hook the demo buttons to the coach overlay
+    document.getElementById("btnReport").addEventListener("click", () => showFishCoach("perfect"));
+    document.getElementById("btnCall").addEventListener("click", () => showFishCoach("good"));
+    document.getElementById("btnClick").addEventListener("click", () => showFishCoach("bad"));
+  </script>
+</body>
+</html>
