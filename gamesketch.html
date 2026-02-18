@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="./fishCoach.css" />
 
   <style>
-    /* Quick sketch styling (keep simple for now) */
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -160,28 +159,13 @@
       gap: 14px;
     }
 
-    .miniCoachPreview{
-      display:grid;
-      gap: 10px;
-      align-items:center;
-      justify-items:center;
-      text-align:center;
-    }
-
-    .miniCoachPreview img{
-      width: 100%;
-      max-width: 360px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 14px 50px rgba(0,0,0,0.45);
-    }
-
     .tip{
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(0,0,0,0.22);
       border-radius: 16px;
       padding: 12px;
       font-weight: 900;
+      line-height: 1.5;
     }
   </style>
 </head>
@@ -243,12 +227,14 @@
         </div>
       </section>
 
-      <!-- Right: Coach preview -->
+      <!-- Right: no image while solving -->
       <section class="panel side">
-        <div class="miniCoachPreview">
-          <div class="muted"><b>Coach Art Preview</b> (uses your real file name)</div>
-          <img src="./Fish%20game%20char.png" alt="Fish Coach Preview">
-          <div class="tip">Coach = teach + congratulate + explain red flags after each decision.</div>
+        <div class="tip">
+          ✅ The fish coach is hidden while players solve.<br>
+          ✅ It appears only during feedback (after a decision).<br><br>
+          <div class="muted">
+            This keeps attention on the scenario, then teaches after the choice.
+          </div>
         </div>
       </section>
     </div>
@@ -260,6 +246,7 @@
 
       <div class="fish-image-wrapper">
         <img src="./Fish%20game%20char.png" alt="Fish Coach" class="fish-image">
+
         <div class="speech-bubble">
           <div id="fishText"></div>
         </div>
@@ -277,7 +264,6 @@
   <script src="./fishCoach.js"></script>
 
   <script>
-    // Hook the demo buttons to the coach overlay
     document.getElementById("btnReport").addEventListener("click", () => showFishCoach("perfect"));
     document.getElementById("btnCall").addEventListener("click", () => showFishCoach("good"));
     document.getElementById("btnClick").addEventListener("click", () => showFishCoach("bad"));
