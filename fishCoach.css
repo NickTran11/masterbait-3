@@ -1,0 +1,101 @@
+.fish-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.hidden{
+  display: none;
+}
+
+.fish-container{
+  width: min(1050px, 95vw);
+  display: flex;
+  gap: 18px;
+  background: rgba(10,10,20,0.92);
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 22px 80px rgba(0,0,0,0.65);
+}
+
+@media (max-width: 900px){
+  .fish-container{ flex-direction: column; }
+}
+
+.fish-image-wrapper{
+  position: relative;
+  flex: 1.2;
+  min-width: 320px;
+}
+
+.fish-image{
+  width: 100%;
+  max-height: 460px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 0 50px rgba(168,85,247,0.55);
+}
+
+/* Speech bubble */
+.speech-bubble{
+  position: absolute;
+  top: 24px;
+  right: 18px;
+  background: rgba(255,255,255,0.92);
+  color: rgba(0,0,0,0.86);
+  padding: 14px;
+  border-radius: 20px;
+  width: min(320px, 70%);
+  font-weight: 900;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+}
+
+.speech-bubble::after{
+  content: "";
+  position: absolute;
+  left: 24px;
+  bottom: -16px;
+  border: 16px solid transparent;
+  border-top-color: rgba(255,255,255,0.92);
+  filter: drop-shadow(0 10px 10px rgba(0,0,0,0.18));
+}
+
+#fishText{
+  white-space: pre-wrap;
+  line-height: 1.35;
+  font-size: 16px;
+  min-height: 58px;
+}
+
+.fish-panel{
+  flex: 0.9;
+  color: rgba(255,255,255,0.92);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.22);
+  padding: 14px;
+}
+
+#fishLessons{
+  margin-top: 10px;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+#fishCloseBtn{
+  margin-top: 16px;
+  padding: 10px 16px;
+  border: none;
+  background: linear-gradient(135deg,#a855f7,#38bdf8);
+  color: rgba(0,0,0,0.85);
+  font-weight: 1000;
+  border-radius: 12px;
+  cursor: pointer;
+}
+#fishCloseBtn:hover{ filter: brightness(1.08); }
