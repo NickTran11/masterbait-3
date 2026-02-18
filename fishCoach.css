@@ -6,6 +6,12 @@
   justify-content: center;
   align-items: center;
   z-index: 9999;
+
+  animation: fadeIn 0.18s ease-out;
+}
+@keyframes fadeIn{
+  from{ opacity: 0; }
+  to{ opacity: 1; }
 }
 
 .hidden{
@@ -21,16 +27,64 @@
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.15);
   box-shadow: 0 22px 80px rgba(0,0,0,0.65);
+
+  animation: popIn 0.18s ease-out;
+}
+@keyframes popIn{
+  from{ transform: translateY(10px) scale(0.98); opacity: 0.7; }
+  to{ transform: translateY(0) scale(1); opacity: 1; }
 }
 
 @media (max-width: 900px){
   .fish-container{ flex-direction: column; }
 }
 
+/* =================== Fish hologram + motion =================== */
 .fish-image-wrapper{
   position: relative;
   flex: 1.2;
   min-width: 320px;
+}
+
+/* Glow pulse layer behind the image */
+.fish-image-wrapper::before{
+  content:"";
+  position:absolute;
+  inset:-14px;
+  border-radius: 26px;
+  background:
+    radial-gradient(420px 260px at 30% 35%, rgba(168,85,247,0.30), transparent 60%),
+    radial-gradient(420px 260px at 75% 70%, rgba(56,189,248,0.20), transparent 62%);
+  opacity: 0.9;
+  filter: blur(10px);
+  pointer-events:none;
+  animation: holoPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes holoPulse{
+  0%,100%{ transform: scale(1); opacity: 0.7; }
+  50%{ transform: scale(1.05); opacity: 1; }
+}
+
+/* Scanlines overlay */
+.fish-image-wrapper::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: 20px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.05) 0 2px,
+    transparent 2px 7px
+  );
+  opacity: 0.22;
+  pointer-events:none;
+  animation: scanMove 1.6s linear infinite;
+}
+
+@keyframes scanMove{
+  from{ transform: translateY(-14px); }
+  to{ transform: translateY(14px); }
 }
 
 .fish-image{
@@ -39,30 +93,59 @@
   object-fit: cover;
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 0 50px rgba(168,85,247,0.55);
+
+  box-shadow:
+    0 0 22px rgba(168,85,247,0.55),
+    0 0 55px rgba(56,189,248,0.25);
+
+  filter: saturate(1.15) contrast(1.06);
+
+  animation: fishDrift 3.4s ease-in-out infinite;
+  transform-origin: 30% 55%;
 }
 
-/* Speech bubble */
+@keyframes fishDrift{
+  0%,100%{ transform: translateY(0) rotate(-0.4deg) scale(1.01); }
+  50%{ transform: translateY(-6px) rotate(0.4deg) scale(1.02); }
+}
+
+/* =================== Speech bubble from fish mouth =================== */
 .speech-bubble{
   position: absolute;
-  top: 24px;
-  right: 18px;
-  background: rgba(255,255,255,0.92);
+
+  /* ✅ bubble near the fish mouth — tweak if you want */
+  left: 210px;
+  top: 165px;
+
+  background: rgba(255,255,255,0.94);
   color: rgba(0,0,0,0.86);
-  padding: 14px;
+  padding: 14px 16px;
   border-radius: 20px;
-  width: min(320px, 70%);
+  width: min(320px, 74%);
   font-weight: 900;
+
   box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+  border: 1px solid rgba(0,0,0,0.08);
+
+  animation: bubbleFloat 2.6s ease-in-out infinite;
+  z-index: 5; /* above scanlines */
+}
+
+@keyframes bubbleFloat{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-6px); }
 }
 
 .speech-bubble::after{
   content: "";
   position: absolute;
-  left: 24px;
-  bottom: -16px;
-  border: 16px solid transparent;
-  border-top-color: rgba(255,255,255,0.92);
+  left: 28px;
+  bottom: -18px;
+
+  width: 0;
+  height: 0;
+  border: 18px solid transparent;
+  border-top-color: rgba(255,255,255,0.94);
   filter: drop-shadow(0 10px 10px rgba(0,0,0,0.18));
 }
 
@@ -73,6 +156,7 @@
   min-height: 58px;
 }
 
+/* =================== Right panel =================== */
 .fish-panel{
   flex: 0.9;
   color: rgba(255,255,255,0.92);
