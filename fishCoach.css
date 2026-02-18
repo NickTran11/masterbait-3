@@ -1,158 +1,68 @@
-:root{
-  /* header height so overlay starts BELOW it */
-  --headerH: 72px;
-}
-
 .fish-overlay{
   position: fixed;
-  left: 0;
-  right: 0;
-  top: var(--headerH);      /* ✅ does not cover Master Bait header */
-  bottom: 0;
-
-  background: rgba(0,0,0,0.72);
+  inset: 0;
+  background: rgba(0,0,0,0.7);
   display: flex;
   justify-content: center;
-  align-items: stretch;
+  align-items: center;
   z-index: 9999;
-
-  animation: fadeIn 0.18s ease-out;
-}
-@keyframes fadeIn{
-  from{ opacity: 0; }
-  to{ opacity: 1; }
 }
 
 .hidden{
   display: none;
 }
 
-/* FULLSCREEN-style layout */
-.fish-fullscreen{
-  width: 100%;
-  height: calc(100vh - var(--headerH));
-  display: grid;
-  grid-template-columns: 1.5fr 0.9fr;
-  gap: 16px;
-  padding: 16px;
-  align-items: stretch;
-}
-
-@media (max-width: 900px){
-  .fish-fullscreen{
-    grid-template-columns: 1fr;
-    grid-template-rows: 1.2fr 0.8fr;
-  }
-}
-
-/* Image wrapper fills most of screen */
-.fish-image-wrapper{
-  position: relative;
-  border-radius: 22px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(0,0,0,0.35);
+.fish-container{
+  width: min(1050px, 95vw);
+  display: flex;
+  gap: 18px;
+  background: rgba(10,10,20,0.92);
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.15);
   box-shadow: 0 22px 80px rgba(0,0,0,0.65);
 }
 
-/* Glow pulse behind */
-.fish-image-wrapper::before{
-  content:"";
-  position:absolute;
-  inset:-30px;
-  border-radius: 28px;
-  background:
-    radial-gradient(620px 420px at 20% 25%, rgba(168,85,247,0.35), transparent 65%),
-    radial-gradient(620px 420px at 75% 70%, rgba(56,189,248,0.22), transparent 66%);
-  opacity: 0.9;
-  filter: blur(14px);
-  pointer-events:none;
-  animation: holoPulse 2.8s ease-in-out infinite;
+@media (max-width: 900px){
+  .fish-container{ flex-direction: column; }
 }
 
-@keyframes holoPulse{
-  0%,100%{ transform: scale(1); opacity: 0.7; }
-  50%{ transform: scale(1.06); opacity: 1; }
+.fish-image-wrapper{
+  position: relative;
+  flex: 1.2;
+  min-width: 320px;
 }
 
-/* Scanlines */
-.fish-image-wrapper::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius: 22px;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.05) 0 2px,
-    transparent 2px 7px
-  );
-  opacity: 0.22;
-  pointer-events:none;
-  animation: scanMove 1.6s linear infinite;
-}
-@keyframes scanMove{
-  from{ transform: translateY(-14px); }
-  to{ transform: translateY(14px); }
-}
-
-/* ✅ BIG full-screen image inside wrapper */
 .fish-image{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
+  width: 100%;
+  max-height: 460px;
   object-fit: cover;
-
-  filter: saturate(1.16) contrast(1.06);
-  animation: fishDrift 3.4s ease-in-out infinite;
-  transform-origin: 30% 55%;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 0 50px rgba(168,85,247,0.55);
 }
 
-@keyframes fishDrift{
-  0%,100%{ transform: translateY(0) rotate(-0.35deg) scale(1.02); }
-  50%{ transform: translateY(-8px) rotate(0.35deg) scale(1.03); }
-}
-
-/* ================= Speech bubble TOP (won't cover fish/man) ================ */
+/* Speech bubble */
 .speech-bubble{
   position: absolute;
-
-  /* ✅ top position so it doesn't cover fish or man */
-  left: 50%;
-  top: 18px;
-  transform: translateX(-50%);
-
-  background: rgba(255,255,255,0.94);
+  top: 24px;
+  right: 18px;
+  background: rgba(255,255,255,0.92);
   color: rgba(0,0,0,0.86);
-  padding: 14px 16px;
+  padding: 14px;
   border-radius: 20px;
-  width: min(520px, 88%);
+  width: min(320px, 70%);
   font-weight: 900;
-
   box-shadow: 0 18px 40px rgba(0,0,0,0.35);
-  border: 1px solid rgba(0,0,0,0.08);
-
-  animation: bubbleFloat 2.6s ease-in-out infinite;
-  z-index: 6;
 }
 
-@keyframes bubbleFloat{
-  0%,100%{ transform: translateX(-50%) translateY(0); }
-  50%{ transform: translateX(-50%) translateY(-6px); }
-}
-
-/* Tail points DOWN (toward scene) */
 .speech-bubble::after{
   content: "";
   position: absolute;
-  left: 50%;
-  bottom: -18px;
-  transform: translateX(-50%);
-
-  width: 0;
-  height: 0;
-  border: 18px solid transparent;
-  border-top-color: rgba(255,255,255,0.94);
+  left: 24px;
+  bottom: -16px;
+  border: 16px solid transparent;
+  border-top-color: rgba(255,255,255,0.92);
   filter: drop-shadow(0 10px 10px rgba(0,0,0,0.18));
 }
 
@@ -163,30 +73,23 @@
   min-height: 58px;
 }
 
-/* ================= Right panel ================= */
 .fish-panel{
-  border-radius: 22px;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(0,0,0,0.32);
-  backdrop-filter: blur(10px);
-  padding: 16px;
+  flex: 0.9;
   color: rgba(255,255,255,0.92);
-  box-shadow: 0 22px 80px rgba(0,0,0,0.55);
-
-  display:flex;
-  flex-direction: column;
-  gap: 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.22);
+  padding: 14px;
 }
 
 #fishLessons{
-  line-height: 1.6;
+  margin-top: 10px;
+  line-height: 1.5;
   opacity: 0.95;
-  flex: 1;
 }
 
 #fishCloseBtn{
-  align-self: flex-start;
-  margin-top: 6px;
+  margin-top: 16px;
   padding: 10px 16px;
   border: none;
   background: linear-gradient(135deg,#a855f7,#38bdf8);
