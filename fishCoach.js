@@ -1,15 +1,22 @@
+// Fish Coach: overlay + robot typing tick sound (WebAudio)
 const overlay = document.getElementById("fishCoachOverlay");
 const fishText = document.getElementById("fishText");
 const fishLessons = document.getElementById("fishLessons");
+const fishTitle = document.getElementById("fishTitle");
 const closeBtn = document.getElementById("fishCloseBtn");
 
-/* ===== Robot typing sound ===== */
+const xpEl = document.getElementById("xp");
+const streakEl = document.getElementById("streak");
+
+let XP = 0;
+let STREAK = 0;
+
+// ===== Audio (must start after user click) =====
 let audioCtx;
 
-function initAudio(){
-  if(!audioCtx){
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }
+function ensureAudio(){
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if(audioCtx.state === "suspended") audioCtx.resume();
 }
 
 function tickSound(){
@@ -17,71 +24,106 @@ function tickSound(){
   const gain = audioCtx.createGain();
 
   osc.type = "square";
-  osc.frequency.value = 1800;
-
-  gain.gain.value = 0.03;
+  osc.frequency.value = 1750;
+  gain.gain.value = 0.028;
 
   osc.connect(gain);
   gain.connect(audioCtx.destination);
 
-  osc.start();
-  osc.stop(audioCtx.currentTime + 0.03);
+  const t = audioCtx.currentTime;
+  gain.gain.setValueAtTime(0.0001, t);
+  gain.gain.exponentialRampToValueAtTime(0.028, t + 0.004);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.03);
+
+  osc.start(t);
+  osc.stop(t + 0.035);
 }
 
-/* ===== Typing Effect ===== */
+// ===== Typing effect =====
 async function typeText(text){
-  fishText.innerHTML = "";
-  for(let i=0;i<text.length;i++){
-    fishText.innerHTML += text[i];
-    if(text[i] !== " "){
-      tickSound();
-    }
-    await new Promise(r=>setTimeout(r,20));
+  fishText.textContent = "";
+  for(let i=0; i<text.length; i++){
+    const ch = text[i];
+    fishText.textContent += ch;
+    if(ch !== " " && ch !== "\n") tickSound();
+    await new Promise(r => setTimeout(r, 18));
   }
 }
 
-/* ===== Show Coach ===== */
-async function showFishCoach(result){
-
-  initAudio();
-
-  overlay.classList.remove("hidden");
-
-  let message;
-  let lessons;
-
+// ===== Feedback packs =====
+function getPack(result){
   if(result === "perfect"){
-    message = "Well done, you passed this level.";
-    lessons = `
-      ✔ Urgency + threat = red flag.<br>
-      ✔ Always verify sender domain.<br>
-      ✔ Report suspicious emails.
-    `;
-  }
-  else if(result === "good"){
-    message = "Good thinking. Stay alert.";
-    lessons = `
-      ✔ Double-check links before clicking.<br>
-      ✔ Contact IT when unsure.
-    `;
-  }
-  else{
-    message = "Careful. That was phishing bait.";
-    lessons = `
-      ✔ Never click unknown links.<br>
-      ✔ Stop. Think. Verify.
-    `;
+    return {
+      title: "Perfect!",
+      message: "Well done.\nYou passed this level.",
+      xpGain: 40,
+      streakDelta: +1,
+      lessons: [
+        "Urgency + threat is bait (pressure tactics).",
+        "Suspicious domain (look for 0 vs o, extra words).",
+        "Safest move: report it or contact IT."
+      ]
+    };
   }
 
-  fishLessons.innerHTML = lessons;
+  if(result === "good"){
+    return {
+      title: "Good choice!",
+      message: "Nice.\nYou reduced risk.",
+      xpGain: 25,
+      streakDelta: +1,
+      lessons: [
+        "When unsure, verify using official channels.",
+        "Never trust links just because they look familiar.",
+        "Slow down: stop → check → decide."
+      ]
+    };
+  }
 
-  await typeText(message);
+  return {
+    title: "Got baited 😬",
+    message: "Oof…\nThat link was bait.",
+    xpGain: 10,
+    streakDelta: -1,
+    lessons: [
+      "Attackers want a fast click, not careful thinking.",
+      "Never enter passwords from message links.",
+      "If you clicked: close it, change password, report."
+    ]
+  };
 }
 
-/* ===== Close ===== */
-closeBtn.addEventListener("click", ()=>{
-  overlay.classList.add("hidden");
-});
+function openOverlay(){
+  overlay.classList.remove("hidden");
+}
 
-/* ===== Export to main index ===== */
+function closeOverlay(){
+  overlay.classList.add("hidden");
+}
+
+// ===== Main function called from gamesketch.html =====
+async function showFishCoach(result){
+  ensureAudio();
+
+  const pack = getPack(result);
+
+  fishTitle.textContent = pack.title;
+
+  fishLessons.innerHTML = pack.lessons.map(x => `• ${x}`).join("<br>");
+
+  // Update HUD if exists
+  if(xpEl && streakEl){
+    XP += pack.xpGain;
+    STREAK = Math.max(0, STREAK + pack.streakDelta);
+    xpEl.textContent = String(XP);
+    streakEl.textContent = String(STREAK);
+  }
+
+  openOverlay();
+  await typeText(pack.message);
+}
+
+closeBtn.addEventListener("click", closeOverlay);
+
+// Export globally so gamesketch can call it
 window.showFishCoach = showFishCoach;
