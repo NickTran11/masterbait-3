@@ -89,7 +89,7 @@ function getPack(result){
       "Attackers want a fast click, not careful thinking.",
       "Never enter passwords from message links.",
       "If you clicked: close it, change password, report."
-    ]
+      ]
   };
 }
 
@@ -108,7 +108,6 @@ async function showFishCoach(result){
   const pack = getPack(result);
 
   fishTitle.textContent = pack.title;
-
   fishLessons.innerHTML = pack.lessons.map(x => `• ${x}`).join("<br>");
 
   // Update HUD if exists
