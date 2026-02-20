@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Level Select</title>
+  <link rel="stylesheet" href="levelMap.css" />
+</head>
+<body>
+
+  <div class="top-bar">
+    <h1>Master Bait</h1>
+    <div class="progress">Progress: 0 / 5 Levels Completed</div>
+  </div>
+
+  <div class="main-container">
+
+    <!-- Add id="map" -->
+    <div class="map-container" id="map">
+      <div class="path">
+        <svg class="path-svg" viewBox="0 0 1000 500" preserveAspectRatio="none">
+          <!-- Add id="route" -->
+          <path id="route" d="M80,260 C200,80 380,420 520,250 C660,90 780,380 920,210"></path>
+        </svg>
+      </div>
+
+      <!-- Remove inline left/top so JS can place them -->
+      <div class="level-node current" data-level="1">1</div>
+      <div class="level-label" data-level="1">Tutorial</div>
+      <div class="level-rating" data-level="1" aria-label="Level 1 rating">
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+</div>
+
+      <div class="level-node available" data-level="2">2</div>
+      <div class="level-label" data-level="2">Authority</div>
+      <div class="level-rating" data-level="2" aria-label="Level 2 rating">
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+</div>
+
+      <div class="level-node locked" data-level="3">3</div>
+      <div class="level-label" data-level="3">Smishing</div>
+      <div class="level-rating" data-level="3" aria-label="Level 3 rating">
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+</div>
+
+      <div class="level-node locked" data-level="4">4</div>
+      <div class="level-label" data-level="4">Clone</div>
+      <div class="level-rating" data-level="4" aria-label="Level 4 rating">
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+</div>
+
+      <div class="level-node locked" data-level="5">5</div>
+      <div class="level-label" data-level="5">Final</div>
+      <div class="level-rating" data-level="5" aria-label="Level 5 rating">
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+  <span class="rod-slot" aria-hidden="true">
+    <svg class="rod-icon" viewBox="0 0 24 24">
+      <path d="M4 20 L13 3" />
+      <path d="M11 6 C16 8, 19 11, 21 15" />
+      <path d="M21 15 C20.5 17, 19 18.5, 17 19" />
+      <circle cx="17" cy="19" r="1.2" />
+    </svg>
+  </span>
+</div>
+      
+    </div>
+
+    <div class="level-info">
+      <h2>Level Title</h2>
+      <p>Select a level to view details.</p>
+      <ul>
+        <li>Objective 1</li>
+        <li>Objective 2</li>
+      </ul>
+      <button class="start-btn">Start Level</button>
+    </div>
+
+  </div>
+
+  <!-- IMPORTANT: load your map JS AFTER the HTML exists -->
+  <script src="levelMap.js"></script>
+</body>
+</html>

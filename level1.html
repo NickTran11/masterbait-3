@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Level 1 — Inbox</title>
+  <link rel="stylesheet" href="levelBase.css" />
+</head>
+<body>
+
+  <header class="hud">
+    <div class="hud-left">
+      <h1 class="hud-title" id="levelTitle">Level 1 — Tutorial</h1>
+      <div class="hud-subtitle">Objective: Learn controls + spot obvious red flags</div>
+    </div>
+
+    <div class="hud-right">
+  <div class="pill timer">
+    ⏱ <span id="timer">05:00</span>
+  </div>
+
+  <div class="pill score">
+    ⭐ Score: <span id="score">0</span>
+  </div>
+
+  <div class="pill progress-pill">
+    <div class="progress-label">
+      Progress: <span id="progressText">0/3</span>
+    </div>
+    <div class="progressbar">
+      <div class="progressfill" id="progressFill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <a class="exit" href="levelMap.html">Exit</a>
+</div>
+  </header>
+
+  <main class="layout">
+    <!-- Left Sidebar -->
+    <aside class="sidebar panel">
+      <div class="search">
+        <input type="text" placeholder="Search mail..." disabled />
+      </div>
+
+      <nav class="folders">
+        <button class="folder active">📥 Inbox</button>
+        <button class="folder">⭐ Flagged</button>
+        <button class="folder">🚩 Reported</button>
+        <button class="folder">🗑 Deleted</button>
+      </nav>
+
+      <div class="meta muted">
+        Tip: Start by reading the newest messages.
+      </div>
+    </aside>
+
+    <!-- Email List -->
+    <section class="list panel">
+      <div class="list-header">
+        <div class="list-title">Inbox</div>
+        <div class="list-count"><span id="count">3</span> messages</div>
+      </div>
+
+      <div class="email-items"></div>
+    </section>
+
+    <!-- Reading Pane -->
+    <section class="reader panel">
+      <div class="reader-header">
+        <div>
+          <div class="reader-subject" id="readerSubject"></div>
+          <div class="reader-meta muted" id="readerMeta"></div>
+        </div>
+
+        <div class="reader-actions">
+          <button class="btn good">Report</button>
+          <button class="btn ok">Verify Sender</button>
+          <button class="btn bad">Open Link</button>
+          <button class="btn neutral">Delete</button>
+        </div>
+      </div>
+
+      <article class="reader-body" id="readerBody"></article>
+
+      <footer class="reader-footer muted">
+        (Later: this area can show “consequence” text or hints)
+      </footer>
+    </section>
+  </main>
+
+  <!-- Level-specific settings -->
+<script>
+  window.LEVEL_CONFIG = {
+    id: 1,
+    title: "Tutorial",
+    minutes: 5,
+    totalItems: 3
+  };
+</script>
+
+<!-- Start Level Modal -->
+<div id="startModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card panel">
+    <div class="modal-head">
+      <div>
+        <div class="modal-kicker">Mission Briefing</div>
+        <div class="modal-title" id="modalTitle">Level 1 — Tutorial</div>
+        <div class="modal-sub muted" id="modalDesc">
+          Learn the inbox controls and practice spotting obvious red flags.
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-label">Goals</div>
+        <ul id="modalGoals">
+          <li>Practice reading sender + subject + link</li>
+          <li>Use Report / Delete correctly</li>
+        </ul>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-label">Tasks</div>
+        <ul id="modalTasks">
+          <li>Handle all messages in the inbox</li>
+          <li>Finish before the timer hits 0</li>
+        </ul>
+      </div>
+
+      <div class="modal-meta">
+        <div class="pill">⏱ Time: <span id="modalTime">05:00</span></div>
+        <div class="pill">📩 Messages: <span id="modalCount">3</span></div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn ok" id="modalReady">Ready</button>
+    </div>
+  </div>
+</div>
+
+
+  <script>
+  window.LEVEL_CONFIG = { id: 1 };
+</script>
+
+<script src="./data/level1Data.js"></script>
+<script src="./levelBase.js" defer></script>
+
+</body>
+</html>
