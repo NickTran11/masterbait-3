@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>Sign Up</title>
 
 <style>
 body {
@@ -50,14 +50,14 @@ button {
   border: none;
   cursor: pointer;
   font-weight: bold;
-  background: linear-gradient(45deg, #8e2de2, #4a00e0);
-  color: white;
+  background: linear-gradient(45deg, #00c9ff, #92fe9d);
+  color: black;
   transition: 0.3s;
 }
 
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(142,45,226,0.6);
+  box-shadow: 0 5px 20px rgba(0,201,255,0.6);
 }
 
 a {
@@ -75,33 +75,36 @@ a {
 <body>
 
 <div class="card">
-  <h2>Login</h2>
+  <h2>Create Account</h2>
 
   <input id="email" type="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
-  <button id="loginBtn">Login</button>
+  <input id="password" type="password" placeholder="Password (min 6 characters)">
+  <button id="signupBtn">Sign Up</button>
 
   <p style="margin-top:20px;">
-    Don't have an account?
-    <a href="signup.html">Sign up</a>
+    Already have an account?
+    <a href="index.html">Login</a>
   </p>
 
   <p id="message"></p>
 </div>
 
 <script type="module">
-import { login } from "./app.js";
+import { signup } from "./app.js";
 
 const msg = document.getElementById("message");
 
-document.getElementById("loginBtn").addEventListener("click", async () => {
+document.getElementById("signupBtn").addEventListener("click", async () => {
   msg.textContent = "";
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
   try {
-    await login(email, password);
-    window.location.href = "loginsuccess.html";
+    await signup(email, password);
+    msg.textContent = "Account created successfully ✅";
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 1200);
   } catch (error) {
     msg.textContent = error.message;
   }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login Successful</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top left, #2a0f44, #050816);
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  padding: 50px;
+  width: 400px;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(155, 89, 255, 0.3);
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+.countdown {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #a970ff;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>Login Successful ✅</h2>
+  <p>Welcome back, Commander.</p>
+  <p class="countdown">Redirecting to Home in <span id="timer">5</span> seconds...</p>
+</div>
+
+<script type="module">
+import { watchAuth } from "./app.js";
+
+watchAuth((user) => {
+  if (!user) {
+    window.location.href = "index.html";
+  }
+});
+
+let seconds = 5;
+const timerElement = document.getElementById("timer");
+
+const countdown = setInterval(() => {
+  seconds--;
+  timerElement.textContent = seconds;
+
+  if (seconds <= 0) {
+    clearInterval(countdown);
+    window.location.href = "home.html";
+  }
+}, 1000);
+</script>
+
+</body>
+</html>
