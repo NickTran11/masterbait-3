@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Master Bait - Game Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <!-- Background -->
+    <div class="app-root">
+        <div class="animated-bg"></div>
+        <div class="bg-overlay-pattern"></div>
+        <div class="bg-vignette"></div>
+
+        <!-- Content Wrapper -->
+        <div class="content-layer">
+            
+            <!-- Header -->
+            <div class="header-wrapper">
+                <button id="header-settings-btn" class="header-btn" aria-label="Settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Main Container -->
+            <div class="main-view">
+                
+                <!-- Landing View -->
+                <div id="landing-view" class="landing-container">
+                    <div style="width: 100%; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; min-height: 600px;">
+                        
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 32px; width: 100%; max-width: 896px; padding: 0 16px;">
+                            <!-- Game Title -->
+                            <div style="width: 100%; display: flex; justify-content: center; transform: scale(1); transition: transform 0.3s;">
+                                <div class="game-title-container">
+                                    <div class="game-title-scaler">
+                                        <div class="swing-wrapper">
+                                            <!-- Fishing Line -->
+                                            <div class="fishing-line"></div>
+                                            <!-- Hook Group -->
+                                            <div class="hook-group">
+                                                <div class="hook-svg-wrapper">
+                                                    <svg viewBox="0 0 50 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                                                        <defs>
+                                                            <linearGradient id="hookMetal" x1="0" y1="0" x2="1" y2="1">
+                                                                <stop offset="0%" stop-color="#d1d5db" />
+                                                                <stop offset="40%" stop-color="#f9fafb" />
+                                                                <stop offset="60%" stop-color="#9ca3af" />
+                                                                <stop offset="100%" stop-color="#4b5563" />
+                                                            </linearGradient>
+                                                        </defs>
+                                                        <circle cx="25" cy="6" r="4.5" stroke="url(#hookMetal)" stroke-width="3" />
+                                                        <path d="M 25 10 L 25 75 C 25 98, 5 98, 5 75 L 5 60" stroke="url(#hookMetal)" stroke-width="3.5" stroke-linecap="round" fill="none" />
+                                                        <path d="M 5 60 L 11 68" stroke="url(#hookMetal)" stroke-width="3" stroke-linecap="round" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <!-- Envelope -->
+                                            <div class="envelope-wrapper">
+                                                <div class="envelope">
+                                                    <div class="envelope-pattern"></div>
+                                                    <div style="position: absolute; top: 16px; left: 16px; width: 64px; height: 4px; background-color: rgba(153, 27, 27, 0.2); transform: rotate(-2deg);"></div>
+                                                    <div style="position: absolute; bottom: 16px; left: 16px; width: 96px; height: 96px; border-left: 4px solid rgba(156, 163, 175, 0.1); border-bottom: 4px solid rgba(156, 163, 175, 0.1); border-bottom-left-radius: 24px;"></div>
+                                                    <div style="position: relative; z-index: 10; display: flex; align-items: center; gap: 16px; transform: rotate(-2deg);">
+                                                        <span class="title-text-master">MASTER</span>
+                                                        <span class="title-text-bait">BAIT</span>
+                                                    </div>
+                                                    <div class="stamp">Confidential</div>
+                                                    <div style="position: absolute; top: -4px; right: -4px; width: 16px; height: 16px; background-color: rgba(0,0,0,0.6); border-radius: 50%; filter: blur(1px);"></div>
+                                                    <div style="position: absolute; top: -4px; right: -4px; width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(107, 114, 128, 0.5);"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Main Action Area -->
+                            <div style="width: 100%; max-width: 190px; display: flex; flex-direction: column; gap: 12px; margin-top: 80px;">
+                                <!-- Start Button -->
+                                <div style="width: 100%; z-index: 10;">
+                                    <button id="start-btn" class="btn-start">
+                                        <span style="position: relative; z-index: 10; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1)); display: flex; align-items: center; gap: 8px; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">
+                                            Start Game
+                                            <svg style="width: 16px; height: 16px; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                                            </svg>
+                                        </span>
+                                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent); pointer-events: none;"></div>
+                                    </button>
+                                </div>
+
+                                <!-- Secondary Actions -->
+                                <div style="display: flex; gap: 8px; width: 100%;">
+                                    <button class="btn-secondary btn-login" onclick="console.log('Login')">
+                                        <span style="filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));">Login</span>
+                                    </button>
+                                    <button class="btn-secondary btn-signup" onclick="console.log('Sign Up')">
+                                        <span style="filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));">Sign Up</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Version Footer -->
+                    <div class="footer">
+                        v1.0.6-live • MASTER BAIT STUDIOS<br/>
+                        FISHING FOR COMPLIMENTS
+                    </div>
+                </div>
+
+                <!-- Dashboard View -->
+                <div id="dashboard-view" class="dashboard-view hidden">
+                    <!-- Top Bar -->
+                    <div class="dashboard-header">
+                        <button id="dashboard-back-btn" class="btn-back">
+                            <svg style="width: 24px; height: 24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                            <span style="font-weight: bold; text-transform: uppercase; font-size: 0.875rem; letter-spacing: 0.05em;">Back</span>
+                        </button>
+                        
+                        <h2 class="dashboard-title">Adventure Map</h2>
+                    </div>
+
+                    <!-- Map Container -->
+                    <div id="dashboard-content" class="dashboard-content">
+                        <!-- Content injected by JS -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Overlay -->
+    <div id="settings-overlay" class="settings-overlay hidden">
+        <!-- Backdrop -->
+        <div id="settings-backdrop" class="settings-backdrop"></div>
+
+        <!-- Modal Content -->
+        <div class="settings-modal">
+            
+            <!-- Header -->
+            <div class="settings-header">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin-slow" style="color: #f97316; width: 24px; height: 24px;">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    <h2 style="font-size: 1.5rem; font-weight: bold; color: white; letter-spacing: 0.1em; text-transform: uppercase; margin: 0;">Settings</h2>
+                </div>
+                <button id="settings-close-btn" style="color: #9ca3af; font-size: 1.5rem; line-height: 1;">&times;</button>
+            </div>
+
+            <!-- Body -->
+            <div class="settings-body">
+                <!-- Setting Item 1 -->
+                <div class="settings-row">
+                    <span class="settings-label">Master Volume</span>
+                    <input type="range" style="width: 128px; height: 8px; background: #374151; border-radius: 4px; appearance: none; cursor: pointer;" />
+                </div>
+
+                <!-- Setting Item 2 -->
+                <div class="settings-row">
+                    <span class="settings-label">Music</span>
+                    <div style="width: 48px; height: 24px; background-color: #ea580c; border-radius: 9999px; display: flex; align-items: center; padding: 4px; cursor: pointer; justify-content: flex-end;">
+                        <div style="width: 16px; height: 16px; background-color: white; border-radius: 50%; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);"></div>
+                    </div>
+                </div>
+
+                <!-- Setting Item 3 -->
+                <div class="settings-row">
+                    <span class="settings-label">SFX</span>
+                    <div style="width: 48px; height: 24px; background-color: #374151; border-radius: 9999px; display: flex; align-items: center; padding: 4px; cursor: pointer;">
+                        <div style="width: 16px; height: 16px; background-color: #9ca3af; border-radius: 50%; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);"></div>
+                    </div>
+                </div>
+
+                <!-- Setting Item 4 -->
+                <div class="settings-row">
+                    <span class="settings-label">Graphics Quality</span>
+                    <select style="background-color: #1f2937; border: 1px solid rgba(168, 85, 247, 0.3); color: white; border-radius: 4px; padding: 4px; font-size: 0.875rem;">
+                        <option>Low</option>
+                        <option>Medium</option>
+                        <option selected>High</option>
+                        <option>Ultra</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="settings-footer">
+                <button id="settings-close-footer" class="btn-close-text">Close Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
