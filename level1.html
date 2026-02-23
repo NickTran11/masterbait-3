@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Level 1 — Inbox</title>
   <link rel="stylesheet" href="levelBase.css" />
+  <link rel="stylesheet" href="fishCoach.css">
 </head>
 <body>
 
@@ -74,7 +75,7 @@
         <div class="reader-actions">
   <button class="btn good" data-action="report">Report</button>
   <button class="btn ok" data-action="inspect">Inspect</button>
-  <button class="btn bad" data-action="open">Open Link</button>
+  <button class="btn bad" data-action="openLink">Open Link</button>
   <button class="btn neutral" data-action="delete">Delete</button>
   <button class="btn neutral" data-action="reply">Reply</button>
 </div>
@@ -140,12 +141,34 @@
   </div>
 </div>
 
+<!-- Fish Coach overlay -->
+<div id="fishCoachOverlay" class="fish-overlay hidden">
+  <div class="fish-container">
+
+    <div class="fish-image-wrapper">
+      <img src="./Fish game char.png" alt="Fish Coach" class="fish-image">
+      <div class="speech-bubble">
+        <div id="fishText"></div>
+      </div>
+    </div>
+
+    <div class="fish-panel">
+      <h2 id="fishTitle">Feedback</h2>
+      <div id="fishLessons"></div>
+      <button id="fishCloseBtn">Continue</button>
+    </div>
+
+  </div>
+</div>
+
 
   <script>
   window.LEVEL_CONFIG = { id: 1 };
 </script>
 
 <script src="./data/level1Data.js"></script>
+
+<script src="fishCoach.js"></script>
 <script src="./levelBase.js" defer></script>
 
 </body>

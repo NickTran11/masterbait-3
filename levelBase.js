@@ -194,13 +194,16 @@ function handleEmailAction(actionName) {
     setProgress(itemsCompleted + outcome.progressDelta, LEVEL_TOTAL_ITEMS);
   }
 
-  // Show feedback (temporary simple alert)
-  if (outcome.feedbackTitle || outcome.feedbackHtml) {
-    alert(
-      `${outcome.feedbackTitle ?? "Result"}\n\n` +
-      (outcome.feedbackHtml ?? "").replace(/<[^>]*>/g, "")
-    );
-  }
+  // Show feedback in Fish Coach popup (preferred)
+if (outcome.coach && typeof window.showFishCoachCustom === "function") {
+  window.showFishCoachCustom(outcome.coach);
+} else if (outcome.feedbackTitle || outcome.feedbackHtml) {
+  // fallback
+  alert(
+    `${outcome.feedbackTitle ?? "Result"}\n\n` +
+    (outcome.feedbackHtml ?? "").replace(/<[^>]*>/g, "")
+  );
+}
 
   // Resolve email if needed
   if (outcome.markResolved) {

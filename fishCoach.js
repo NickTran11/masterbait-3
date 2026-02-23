@@ -127,3 +127,75 @@ closeBtn.addEventListener("click", closeOverlay);
 
 // Export globally so gamesketch can call it
 window.showFishCoach = showFishCoach;
+
+// =============================
+// Custom Coach (data-driven)
+// =============================
+(function(){
+  const overlay = document.getElementById("fishCoachOverlay");
+  const fishText = document.getElementById("fishText");
+  const fishTitle = document.getElementById("fishTitle");
+  const fishLessons = document.getElementById("fishLessons");
+  const closeBtn = document.getElementById("fishCloseBtn");
+
+  if (!overlay || !fishText || !fishTitle || !fishLessons || !closeBtn) return;
+
+  function escapeHtml(str){
+    return String(str)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function typeBubble(text, speed = 18){
+    fishText.textContent = "";
+    const s = String(text ?? "");
+    let i = 0;
+
+    const tick = () => {
+      fishText.textContent += s[i] ?? "";
+      i++;
+      if (i < s.length) setTimeout(tick, speed);
+    };
+    tick();
+  }
+
+  function renderLessons(lessons){
+    // lessons can be:
+    // - array of strings
+    // - string of HTML
+    if (!lessons) {
+      fishLessons.innerHTML = "";
+      return;
+    }
+
+    if (Array.isArray(lessons)) {
+      fishLessons.innerHTML =
+        "<ul>" + lessons.map(l => `<li>${escapeHtml(l)}</li>`).join("") + "</ul>";
+      return;
+    }
+
+    // Assume HTML string
+    fishLessons.innerHTML = String(lessons);
+  }
+
+  function openCoach(payload){
+    // payload: { title, bubbleText, lessons, typingSpeed }
+    fishTitle.textContent = payload?.title ?? "Feedback";
+    renderLessons(payload?.lessons);
+    typeBubble(payload?.bubbleText ?? "", payload?.typingSpeed ?? 18);
+
+    overlay.classList.remove("hidden");
+  }
+
+  function closeCoach(){
+    overlay.classList.add("hidden");
+  }
+
+  closeBtn.addEventListener("click", closeCoach);
+
+  // Expose globally so levelBase.js can call it
+  window.showFishCoachCustom = openCoach;
+})();
