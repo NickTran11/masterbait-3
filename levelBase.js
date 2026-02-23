@@ -142,25 +142,95 @@ function renderEmails() {
     `;
 
     btn.addEventListener("click", () => {
-      document.querySelectorAll(".email-item").forEach(i => i.classList.remove("selected"));
-      btn.classList.add("selected");
-      loadEmail(email);
-    });
+  document.querySelectorAll(".email-item").forEach(i => i.classList.remove("selected"));
+  btn.classList.add("selected");
+  loadEmail(email);
+  setSelectedEmail(email);
+});
 
     emailListContainer.appendChild(btn);
   });
 
   // load first email into reader
-  if (emails.length > 0) loadEmail(emails[0]);
+  if (emails.length > 0) {
+  loadEmail(emails[0]);
+  setSelectedEmail(emails[0]);
+}
 }
 
 // ---- Init HUD text ----
 if (headerTitleEl) headerTitleEl.textContent = `Level ${levelId} — ${levelTitle}`;
 if (headerSubEl && levelObjective) headerSubEl.textContent = `Objective: ${levelObjective}`;
 
+// =====================
+// Email Action Handling
+// =====================
+
+// Track currently selected email
+let selectedEmail = null;
+
+function setSelectedEmail(email) {
+  selectedEmail = email;
+}
+
+function handleEmailAction(actionName) {
+  if (!selectedEmail) return;
+
+  const actions = selectedEmail.actions || {};
+  const outcome = actions[actionName];
+
+  if (!outcome) {
+    console.warn(`No outcome defined for action "${actionName}"`);
+    return;
+  }
+
+  // Apply score
+  if (typeof outcome.scoreDelta === "number") {
+    addScore(outcome.scoreDelta);
+  }
+
+  // Apply progress
+  if (typeof outcome.progressDelta === "number") {
+    setProgress(itemsCompleted + outcome.progressDelta, LEVEL_TOTAL_ITEMS);
+  }
+
+  // Show feedback (temporary simple alert)
+  if (outcome.feedbackTitle || outcome.feedbackHtml) {
+    alert(
+      `${outcome.feedbackTitle ?? "Result"}\n\n` +
+      (outcome.feedbackHtml ?? "").replace(/<[^>]*>/g, "")
+    );
+  }
+
+  // Resolve email if needed
+  if (outcome.markResolved) {
+    const index = emails.indexOf(selectedEmail);
+    if (index !== -1) {
+      emails.splice(index, 1);
+    }
+
+    selectedEmail = null;
+    renderEmails();
+  }
+}
+
+// Attach click handlers to reader buttons
+function wireActionButtons(){
+  document.querySelectorAll(".reader-actions [data-action]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const action = btn.dataset.action;
+      console.log("Clicked action:", action);
+      handleEmailAction(action);
+    });
+  });
+}
+
+
 // ---- Init ----
 setScore(0);
 setProgress(0, LEVEL_TOTAL_ITEMS);
+
+wireActionButtons();
 renderEmails();
 // startTimer(); // do not auto-start (modal controls start)
 

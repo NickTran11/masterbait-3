@@ -161,6 +161,24 @@ function applyLockStatesFromData() {
   });
 }
 
+function unlockLevel(levelId) {
+  const node = document.querySelector(`.level-node[data-level="${levelId}"]`);
+  if (!node) return;
+
+  // Update data model
+  if (!LEVELS[levelId]) return;
+  LEVELS[levelId].unlocked = true;
+
+  // Play animation on node (even if it currently has locked class)
+  node.classList.add("unlocking");
+
+  // After sparkle, switch to available and remove locked visuals
+  setTimeout(() => {
+    node.classList.remove("unlocking");
+    applyLockStatesFromData(); // sync classes based on LEVELS
+  }, 520);
+}
+
 // ---------- Click handling ----------
 function wireLevelClicks() {
   const nodes = document.querySelectorAll(".level-node");
@@ -170,10 +188,11 @@ function wireLevelClicks() {
     node.addEventListener("click", () => {
       const levelId = node.dataset.level;
 
-      // If locked, ignore click (game feel)
-      if (!LEVELS[levelId]?.unlocked || isLocked(node)) {
-        return;
-      }
+      // If locked, demo-unlock it (REMOVE later if you want strict locking)
+if (!LEVELS[levelId]?.unlocked || isLocked(node)) {
+  unlockLevel(levelId);
+  return;
+}
 
       moveSelectedGlow(node);
       updateSidePanel(levelId);
@@ -215,6 +234,57 @@ function setRodRating(levelId, earned) {
   });
 }
 
+function initParallax(){
+  const map = document.getElementById("map");
+  if (!map) return;
+
+  const nebula = map.querySelector(".map-nebula");
+  const particles = map.querySelector(".map-particles");
+  const nodes = [...map.querySelectorAll(".level-node")];
+
+  let targetX = 0, targetY = 0;
+  let curX = 0, curY = 0;
+  let raf = null;
+
+  function tick(){
+    raf = null;
+
+    // Smooth follow
+    curX += (targetX - curX) * 0.12;
+    curY += (targetY - curY) * 0.12;
+
+    // Background layers move more
+    if (nebula) nebula.style.transform = `translate3d(${curX * 22}px, ${curY * 14}px, 0)`;
+    if (particles) particles.style.transform = `translate3d(${curX * 14}px, ${curY * 10}px, 0)`;
+
+    // Nodes move tiny (1–2px range)
+    nodes.forEach((n, idx) => {
+      const depth = 0.8 + (idx % 3) * 0.2; // subtle variance
+      n.style.setProperty("--parX", `${curX * 4 * depth}px`);
+      n.style.setProperty("--parY", `${curY * 4 * depth}px`);
+    });
+  }
+
+  function schedule(){
+    if (raf) return;
+    raf = requestAnimationFrame(tick);
+  }
+
+  map.addEventListener("mousemove", (e) => {
+    const r = map.getBoundingClientRect();
+    const nx = (e.clientX - r.left) / r.width;   // 0..1
+    const ny = (e.clientY - r.top) / r.height;  // 0..1
+    targetX = (nx - 0.5); // -0.5..0.5
+    targetY = (ny - 0.5);
+    schedule();
+  });
+
+  map.addEventListener("mouseleave", () => {
+    targetX = 0; targetY = 0;
+    schedule();
+  });
+}
+
 // ---------- Init ----------
 function initLevelMap() {
   placeNodesOnPath();
@@ -226,6 +296,7 @@ setRodRating("3", 0);
 setRodRating("4", 0);
 setRodRating("5", 0);
   wireLevelClicks();
+  initParallax();
 
   // Default selection (pick the first unlocked level)
   const firstUnlocked = Object.keys(LEVELS).find(id => LEVELS[id].unlocked);

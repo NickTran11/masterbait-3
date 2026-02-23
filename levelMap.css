@@ -74,6 +74,135 @@ body{
   overflow:hidden;
 }
 
+/* =============================== */
+/* Mystic Nebula Ambient Pack      */
+/* =============================== */
+
+/* Ensure map container can layer stuff cleanly */
+.map-container{
+  position: relative; /* you already have this */
+}
+
+/* Put decor behind nodes but above background */
+.map-nebula,
+.map-particles{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0; /* decor layer */
+}
+
+/* Make sure your actual content sits above decor */
+.path,
+.level-node,
+.level-label,
+.level-rating{
+  position: absolute;
+  z-index: 2;
+}
+
+/* If your SVG path isn't positioned as absolute already, keep it */
+.path{ z-index: 1; }
+
+/* ---------- Nebula blobs ---------- */
+.map-nebula{
+  filter: blur(10px);
+  opacity: 0.95;
+}
+
+/* Use pseudo blobs so you don’t need extra HTML */
+.map-nebula::before,
+.map-nebula::after{
+  content:"";
+  position:absolute;
+  inset:-25%;
+  background:
+    radial-gradient(380px 260px at 18% 30%, rgba(168,85,247,0.18), transparent 70%),
+    radial-gradient(420px 300px at 72% 40%, rgba(56,189,248,0.14), transparent 70%),
+    radial-gradient(300px 220px at 52% 78%, rgba(168,85,247,0.10), transparent 70%),
+    radial-gradient(260px 200px at 88% 82%, rgba(56,189,248,0.08), transparent 70%);
+  transform: translate3d(0,0,0);
+  animation: nebulaDriftA 22s ease-in-out infinite;
+}
+
+.map-nebula::after{
+  opacity: 0.65;
+  filter: blur(16px);
+  background:
+    radial-gradient(520px 360px at 22% 70%, rgba(56,189,248,0.12), transparent 70%),
+    radial-gradient(520px 360px at 78% 30%, rgba(168,85,247,0.14), transparent 70%),
+    radial-gradient(360px 260px at 55% 45%, rgba(255,255,255,0.04), transparent 70%);
+  animation: nebulaDriftB 28s ease-in-out infinite;
+}
+
+@keyframes nebulaDriftA{
+  0%   { transform: translate(-2%, -1%) scale(1); }
+  50%  { transform: translate(2%,  1%) scale(1.03); }
+  100% { transform: translate(-2%, -1%) scale(1); }
+}
+@keyframes nebulaDriftB{
+  0%   { transform: translate(2%, 1%) scale(1.02); }
+  50%  { transform: translate(-2%, -1%) scale(1.06); }
+  100% { transform: translate(2%, 1%) scale(1.02); }
+}
+
+/* ===================== */
+/* Parallax support */
+/* ===================== */
+.map-nebula,
+.map-particles{
+  will-change: transform;
+}
+
+/* Add parallax offsets without breaking centering */
+.level-node{
+  transform: translate(calc(-50% + var(--parX, 0px)), calc(-50% + var(--parY, 0px)));
+}
+
+/* Keep hover effect working with parallax offsets */
+.level-node:hover{
+  transform: translate(calc(-50% + var(--parX, 0px)), calc(-52% + var(--parY, 0px))) scale(1.03);
+}
+
+/* ---------- Particles ---------- */
+/* We generate particles using background layers (no extra divs per particle) */
+.map-particles{
+  opacity: 0.75;
+  mix-blend-mode: screen;
+  filter: blur(0.5px);
+  background:
+    radial-gradient(circle at 12% 25%, rgba(255,255,255,0.20) 0 2px, transparent 3px),
+    radial-gradient(circle at 22% 70%, rgba(56,189,248,0.14) 0 3px, transparent 5px),
+    radial-gradient(circle at 35% 40%, rgba(168,85,247,0.16) 0 3px, transparent 5px),
+    radial-gradient(circle at 48% 18%, rgba(255,255,255,0.18) 0 2px, transparent 4px),
+    radial-gradient(circle at 58% 62%, rgba(56,189,248,0.12) 0 3px, transparent 5px),
+    radial-gradient(circle at 66% 32%, rgba(168,85,247,0.12) 0 3px, transparent 5px),
+    radial-gradient(circle at 78% 76%, rgba(255,255,255,0.06) 0 3px, transparent 5px),
+    radial-gradient(circle at 15% 55%, rgba(168,85,247,0.14) 0 3px, transparent 5px),
+radial-gradient(circle at 30% 82%, rgba(255,255,255,0.12) 0 3px, transparent 5px),
+radial-gradient(circle at 62% 14%, rgba(56,189,248,0.16) 0 3px, transparent 5px),
+radial-gradient(circle at 80% 60%, rgba(168,85,247,0.14) 0 3px, transparent 5px),
+    radial-gradient(circle at 88% 22%, rgba(56,189,248,0.24) 0 3px, transparent 5px),
+    radial-gradient(circle at 92% 55%, rgba(168,85,247,0.10) 0 3px, transparent 5px);
+  filter: blur(0.2px);
+  animation: particleFloat 18s ease-in-out infinite;
+}
+
+@keyframes particleFloat{
+  0%   { transform: translate3d(0,0,0); opacity: 0.60; }
+  50%  { transform: translate3d(-1.2%, -1.0%, 0); opacity: 0.85; }
+  100% { transform: translate3d(0,0,0); opacity: 0.60; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .map-nebula::before,
+  .map-nebula::after,
+  .map-particles{
+    animation: none !important;
+  }
+}
+
 /* soft “map” texture shapes */
 .map-container::before{
   content:"";
@@ -103,6 +232,18 @@ body{
   fill: none;
   stroke-linecap: round;
   stroke-dasharray: 12 14;
+
+  /* NEW */
+  animation: dashFlow 3.2s linear infinite;
+}
+
+@keyframes dashFlow{
+  to { stroke-dashoffset: -52; }
+}
+
+/* Optional: if you want it a bit calmer */
+@media (prefers-reduced-motion: reduce){
+  .path path{ animation: none !important; }
 }
 
 /* ---- Nodes ---- */
@@ -179,6 +320,55 @@ body{
     0 0 0 10px rgba(59,130,246,0.18),
     0 18px 40px rgba(59,130,246,0.22);
   outline: 1px solid rgba(255,255,255,0.18);
+}
+
+/* ===================== */
+/* Unlock Animation (Demo) */
+/* ===================== */
+
+/* Smooth lock fade when unlocking */
+.level-node.locked::after{
+  transition: opacity .22s ease, transform .22s ease;
+}
+
+/* Temporary unlocking state */
+.level-node.unlocking{
+  filter: brightness(1.15) saturate(1.15);
+  box-shadow:
+    0 0 0 6px rgba(255,255,255,0.08),
+    0 0 0 10px rgba(168,85,247,0.22),
+    0 18px 40px rgba(56,189,248,0.18);
+}
+
+/* Lock icon fades out */
+.level-node.unlocking::after{
+  opacity: 0;
+  transform: translateY(6px) scale(0.9);
+}
+
+/* Sparkle burst */
+.level-node.unlocking::before{
+  content:"";
+  position:absolute;
+  inset:-26px;
+  border-radius: 26px;
+  pointer-events:none;
+
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255,255,255,0.95) 0 2px, transparent 7px),
+    radial-gradient(circle at 70% 25%, rgba(56,189,248,0.85) 0 2px, transparent 8px),
+    radial-gradient(circle at 30% 70%, rgba(168,85,247,0.85) 0 2px, transparent 8px),
+    radial-gradient(circle at 75% 75%, rgba(255,255,255,0.80) 0 2px, transparent 8px);
+
+  opacity: 0;
+  transform: scale(0.9);
+  animation: sparkleBurst .45s ease forwards;
+}
+
+@keyframes sparkleBurst{
+  0%   { opacity: 0; transform: scale(0.85); }
+  30%  { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0; transform: scale(1.25); }
 }
 
 /* labels */
