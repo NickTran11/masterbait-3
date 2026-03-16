@@ -14,6 +14,7 @@
   --okay-bg: #e6f0ff;
   --bad: #c2410c;
   --bad-bg: #fff0e8;
+  --headerH: 72px;
 }
 
 *{
@@ -631,87 +632,85 @@ html, body{
 }
 
 .hintable{
-  cursor: help;
+  cursor: default;
   position: relative;
   background: linear-gradient(to bottom, transparent 70%, rgba(255, 200, 0, 0.25) 70%);
 }
 
-/* Verification modal */
-.verify-overlay{
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  display: grid;
-  place-items: center;
-  z-index: 1000;
+/* ===== Fish coach overlay additions ===== */
+.fish-lessons{
+  line-height: 1.6;
+  margin-bottom: 10px;
 }
 
-.verify-modal{
-  width: min(92vw, 560px);
-  background: #fff;
-  border-radius: 18px;
-  padding: 20px;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.22);
-  display: grid;
-  gap: 12px;
+.proof-box{
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
 }
 
-.verify-title{
-  font-size: 21px;
+.proof-title{
   font-weight: 800;
+  margin-bottom: 8px;
 }
 
-.verify-text{
-  color: #333;
+.proof-text{
   line-height: 1.5;
+  margin-bottom: 10px;
 }
 
-.verify-input{
+.proof-input{
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #ccc;
   border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(0,0,0,0.22);
+  color: #fff;
   font-size: 15px;
+  margin-bottom: 8px;
 }
 
-.verify-help{
-  color: #666;
-  font-size: 14px;
+.proof-input::placeholder{
+  color: rgba(255,255,255,0.55);
 }
 
-.verify-actions{
+.proof-help{
+  color: rgba(255,255,255,0.72);
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.proof-actions{
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-.verify-btn{
+.proof-btn{
   border: none;
   border-radius: 10px;
-  background: #0f6cbd;
-  color: #fff;
-  padding: 11px 14px;
+  background: linear-gradient(135deg,#a855f7,#38bdf8);
+  color: rgba(0,0,0,0.85);
+  padding: 10px 14px;
   cursor: pointer;
   font-weight: 700;
 }
 
-.verify-btn.ghost{
-  background: #eef2f7;
-  color: #1f1f1f;
-}
-
-.verify-result{
+.proof-result{
+  margin-top: 10px;
   min-height: 24px;
   font-weight: 700;
   line-height: 1.4;
 }
 
-.verify-result.good{
-  color: #0f8a5f;
+.proof-result.good{
+  color: #9ff0c2;
 }
 
-.verify-result.bad{
-  color: #b42318;
+.proof-result.bad{
+  color: #ffb4b4;
 }
 
 /* Responsive */
