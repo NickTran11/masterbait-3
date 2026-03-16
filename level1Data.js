@@ -3,30 +3,30 @@ window.LEVEL1_EMAIL = {
   messages: [
     {
       id: "msg-1",
-      sender: "ThingSpeak Trial Program",
-      senderInitials: "TP",
-      fromName: "ThingSpeak Trial Program",
-      fromEmail: "<trials@mail.thingspeak.com>",
-      toEmail: "Bach Tran",
+      sender: "Amazon Official",
+      senderInitials: "A",
+      fromName: "Amazon Official",
+      fromEmail: "<amazon-rep@mail.com>",
+      toEmail: "Ben Dover",
       time: "Sat 3/14/2026 6:15 AM",
-      subject: "ACTION REQUIRED - You have exceeded the usage limit for your ThingSpeak account",
-      previewTop: "ACTION REQUIRED - Y...",
-      previewBottom: "CAUTION - EXTERNAL EMAIL This e-mail has originated from outside...",
+      subject: "CONGRATUALATION - You have been chosen to enter Amazon giveaways",
+      previewTop: "CONGRATUALATION - Y...",
+      previewBottom: "TRUSTED - OFFICIAL EMAIL This e-mail has originated from Amazon...",
       external: true,
       suspicious: true,
       body: {
-        greeting: "Hello Bach,",
+        greeting: "Hello Ben,",
         paragraphs: [
-          "You have exceeded the message limit for your ThingSpeak account bach.tran@edu.sait.ca. All channels for this account are no longer collecting data.",
-          "Consider upgrading to a paid license to resume collection of data on your channels prior to the anniversary date of your account.",
-          "For details on your message usage and to upgrade to a paid license, see the My Account page."
+          "You have been chosen as our lucky customer to enter Amazon giveaways bendover@email.com . There are only 20 spots and you are that lucky!",
+          "Claim your free Amazon giveaways now by enter this link in order to spin the wheel and receive your prize.",
+          "Don't trust us? See our official page for more details Amazon.com page."
         ],
-        closing: "Thank you,\nThe ThingSpeak Team"
+        closing: "Congratualation,\nAmazon Team"
       },
       inspector: {
-        returnPath: "bounce-1832@mailer.thingspeak-notice.net",
-        replyTo: "support-upgrade@thingspeak-billing-help.com",
-        linkPreview: "https://thingspeak-upgrade-portal.com/account/recover"
+        returnPath: "bounce-1832@mailer.amazon-notice.net",
+        replyTo: "support-upgrade@amazon-billing-help.com",
+        linkPreview: "https://amazon-upgrade-portal.com/giveaways/enter"
       },
       correctAction: "report",
       goodAction: "callit",
