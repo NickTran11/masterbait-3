@@ -1,97 +1,41 @@
-window.LEVEL_DATA = window.LEVEL_DATA || {};
-
-window.LEVEL_DATA[1] = {
-  meta: {
-    title: "Tutorial",
-    objective: "Learn controls + spot obvious red flags",
-    minutes: 5
-  },
-  emails: [
+window.LEVEL1_EMAIL = {
+  folderName: "Inbox",
+  messages: [
     {
-      id: "l1-e1",
-      fromName: "IT Support",
-      fromEmail: "support@micros0ft-secure-login.com",
-      subject: "URGENT: Account locked",
-      preview: "Click to verify your account…",
-      tag: "Suspicious",
-      tagType: "bad",
-      bodyHtml: `
-        <p><b>Hello,</b></p>
-        <p>We detected unusual activity. Click below to verify your account immediately:</p>
-        <p class="link">http://micros0ft-secure-login.com/verify</p>
-        <p>Thanks,<br/>Billing Team</p>
-      `,
-      actions: {
-        report: {
-          scoreDelta: 10,
-          progressDelta: 1,
-          markResolved: true,
-          coach: {
-            bubbleText: "Well done.\nYou passed this level.",
-            title: "Perfect!",
-            lessons: [
-              "Urgency + threat is bait (pressure tactics).",
-              "Suspicious domain: look for 0 vs o, extra words, weird hyphens.",
-              "Safest move: report it or contact IT through a trusted channel."
-            ]
-          }
-        },
-
-        inspect: {
-          scoreDelta: 0,              // no points
-          progressDelta: 0,
-          coach: {
-            bubbleText: "Nice check.\nThis helps confirm your suspicion.",
-            title: "Inspect (Info)",
-            lessons: [
-              "Look closely at the sender domain (typos, extra words, odd TLD).",
-              "Hover links (later) to see the real destination.",
-              "Check for generic greeting + pressure language."
-            ]
-          }
-        },
-
-        openLink: {
-          scoreDelta: 0,
-          progressDelta: 0,
-          coach: {
-            bubbleText: "Oof.\nThat’s the risky move.",
-            title: "Bad call!",
-            lessons: [
-              "Clicking unknown links can lead to credential theft.",
-              "Always verify the sender using a trusted method.",
-              "When in doubt: report."
-            ]
-          }
-        },
-
-        delete: {
-          scoreDelta: 2,
-          progressDelta: 1,
-          markResolved: true,
-          coach: {
-            bubbleText: "Good instinct.\nBut reporting is even better.",
-            title: "Okay!",
-            lessons: [
-              "Deleting removes it from your inbox.",
-              "Reporting also helps protect other people."
-            ]
-          }
-        },
-
-        reply: {
-          scoreDelta: 0,
-          progressDelta: 0,
-          coach: {
-            bubbleText: "Careful.\nReplying can confirm your address is active.",
-            title: "Not recommended",
-            lessons: [
-              "Replying can encourage more phishing attempts.",
-              "Use official channels to verify instead."
-            ]
-          }
-        }
-      }
+      id: "msg-1",
+      sender: "ThingSpeak Trial Program",
+      senderInitials: "TP",
+      fromName: "ThingSpeak Trial Program",
+      fromEmail: "<trials@mail.thingspeak.com>",
+      toEmail: "Bach Tran",
+      time: "Sat 3/14/2026 6:15 AM",
+      subject: "ACTION REQUIRED - You have exceeded the usage limit for your ThingSpeak account",
+      previewTop: "ACTION REQUIRED - Y...",
+      previewBottom: "CAUTION - EXTERNAL EMAIL This e-mail has originated from outside...",
+      external: true,
+      suspicious: true,
+      body: {
+        greeting: "Hello Bach,",
+        paragraphs: [
+          "You have exceeded the message limit for your ThingSpeak account bach.tran@edu.sait.ca. All channels for this account are no longer collecting data.",
+          "Consider upgrading to a paid license to resume collection of data on your channels prior to the anniversary date of your account.",
+          "For details on your message usage and to upgrade to a paid license, see the My Account page."
+        ],
+        closing: "Thank you,\nThe ThingSpeak Team"
+      },
+      inspector: {
+        returnPath: "bounce-1832@mailer.thingspeak-notice.net",
+        replyTo: "support-upgrade@thingspeak-billing-help.com",
+        linkPreview: "https://thingspeak-upgrade-portal.com/account/recover"
+      },
+      correctAction: "report",
+      goodAction: "callit",
+      clues: [
+        "External email warning banner is present.",
+        "Reply-To is different from the From address.",
+        "Link preview points to a suspicious upgrade portal domain.",
+        "Message creates urgency around account disruption."
+      ]
     }
   ]
 };
