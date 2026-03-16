@@ -7,6 +7,7 @@
   const hintList = document.getElementById("hintList");
   const revealHintBtn = document.getElementById("revealHintBtn");
   const decisionFeedback = document.getElementById("decisionFeedback");
+  const exitLevelBtn = document.getElementById("exitLevelBtn");
 
   const fromNameEl = document.getElementById("fromName");
   const fromEmailEl = document.getElementById("fromEmail");
@@ -35,6 +36,14 @@
     renderHints();
     bindActions();
     bindProof();
+    bindExitButton();
+  }
+
+  function bindExitButton() {
+    if (!exitLevelBtn) return;
+    exitLevelBtn.addEventListener("click", () => {
+      window.location.href = "./levelMap.html";
+    });
   }
 
   function renderMessageList() {
@@ -143,17 +152,17 @@
     const isPartial = action === activeMessage.partialAction;
 
     if (isCorrect) {
-      addClue("Correct action chosen: Report phishing.");
-      setDecisionFeedback("good", "Correct. Reporting phishing is the best action here.");
+      addClue("Correct action chosen.");
+      setDecisionFeedback("good", "Correct. That is the best action here.");
       showCoach("perfect", true);
       return;
     }
 
     if (isPartial) {
-      addClue("Partial credit: verifying officially is safer than clicking, but reporting is the best action here.");
+      addClue("Partial credit: safer than clicking, but not the best answer.");
       setDecisionFeedback(
         "warn",
-        "Safer than clicking, but not the best answer. Reporting phishing is the strongest workplace action here."
+        "Safer than clicking, but not the best answer for this scenario."
       );
       showCoach("good", false);
       return;
@@ -222,15 +231,15 @@
     const accepted = activeMessage.verification.acceptedAnswers.map(normalizeAnswer);
 
     if (accepted.includes(answer)) {
-      verificationResult.textContent = "Correct. The safe behavior is to manually type the official Amazon site instead of clicking the email link.";
+      verificationResult.textContent = "Correct. The safe behavior is to manually type the official site instead of clicking the email link.";
       verificationResult.className = "proof-result good";
       verificationHelp.textContent = "Nice work. You identified the trusted domain.";
-      addClue("Player correctly identified the official Amazon domain to visit manually.");
+      addClue("Player correctly identified the official domain to visit manually.");
 
       waitingForProof = false;
       setDecisionFeedback(
         "good",
-        "Excellent. You reported the phish and correctly identified the official site to visit manually."
+        "Excellent. You chose the safest action and identified the correct official website."
       );
 
       if (window.setFishCoachCloseHandler) {
