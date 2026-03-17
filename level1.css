@@ -814,12 +814,20 @@ html, body{
 
 /* dossier button in top-right */
 .dossier-btn{
-  color: #c084fc !important;
-  font-size: 22px;
-  text-shadow: 0 0 8px rgba(192,132,252,0.75);
+  color: #d8b4fe !important;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow:
+    0 0 2px rgba(216,180,254,0.35),
+    0 0 4px rgba(216,180,254,0.22);
+  filter: brightness(1.18) contrast(1.15);
+  opacity: 1;
+  transition: transform 0.15s ease, color 0.15s ease, filter 0.15s ease;
 }
 
 .dossier-btn:hover{
-  color: #e9d5ff !important;
+  color: #f3e8ff !important;
+  filter: brightness(1.28) contrast(1.2);
   transform: scale(1.08);
 }
