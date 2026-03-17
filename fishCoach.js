@@ -45,7 +45,7 @@
       closeHandler();
       return;
     }
-    closeFishCoachCustom();
+    window.location.href = "./levelMap.html";
   });
 
   function escapeHtml(str) {
