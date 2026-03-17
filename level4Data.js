@@ -1,8 +1,8 @@
 window.LEVEL1_EMAIL = {
   scenario: {
-    codename: "SOPHIE BLUE",
-    title: "High School Student",
-    description: "You are Sophie Blue, checking your email in your bedroom and receive a reward email claiming you won an Amazon gift card.",
+    codename: "THEO BUCH",
+    title: "Microsoft Employee",
+    description: "You are Theo Buch, checking your email in your office and receive an urgent email about abc.",
     profile: [
       "Active on social media",
       "Love shopping, makeup and boyfriend",
@@ -13,18 +13,18 @@ window.LEVEL1_EMAIL = {
       "Use discount, gift card, reward to buy things"
     ],
     context: "Your goal is to decide whether this email is legitimate or a phishing attempt. Inspect the sender, message tone, and the real destination of the link before acting.",
-    initials: "SB"
+    initials: "TB"
   },
 
   folderName: "Inbox",
   messages: [
     {
       id: "msg-1",
-      sender: "Amazon Rewards Center",
-      senderInitials: "AM",
-      fromName: "Amazon Rewards Center",
-      fromEmail: "<offers@amazon-reward-center-mail.com>",
-      toEmail: "Sophie Blue",
+      sender: "Microsoft Center",
+      senderInitials: "MC",
+      fromName: "Microsoft Center",
+      fromEmail: "<offers@microsoft-center-mail.com>",
+      toEmail: "Theo Buch",
       time: "Sun 3/15/2026 9:52 PM",
       subject: "Congratulations! Claim your Amazon gift card reward today",
       previewTop: "Congratulations! Claim your Amazon reward",
