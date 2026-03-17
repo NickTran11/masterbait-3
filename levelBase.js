@@ -74,12 +74,20 @@
     });
   }
 
-  function bindScenarioStart() {
-    beginMissionBtn.addEventListener("click", () => {
-      scenarioOverlay.classList.add("hidden");
+function bindScenarioStart() {
+  if (!beginMissionBtn || !scenarioOverlay) return;
+
+  beginMissionBtn.addEventListener("click", () => {
+    // fade out animation
+    scenarioOverlay.style.opacity = "0";
+    scenarioOverlay.style.transition = "opacity 0.3s ease";
+
+    setTimeout(() => {
+      scenarioOverlay.style.display = "none";  // completely remove overlay
       scenarioOverlay.setAttribute("aria-hidden", "true");
-    });
-  }
+    }, 300);
+  });
+}
 
   function renderMessageList() {
     messageList.innerHTML = "";
