@@ -1,19 +1,19 @@
 window.LEVEL2_EMAIL = {
   scenario: {
-    codename: "SOPHIE BLUE",
-    title: "High School Student",
-    description: "You are scrolling a social feed after school and see a flashy giveaway reel plus a suspicious direct message.",
-    strengths: [
+    codename: "ALEXISKA VANZ",
+    title: "Egirl Gamer",
+    description: "You are Alexiska Vanz, scrolling through social media at home watching posts, reels and messages online.",
+    profile: [
+      "Popular egirl gamer, influencer",
       "Active on social media",
-      "Recognizes popular creator trends",
-      "Can compare usernames and links"
+      "Friendly and open to all DMs"
     ],
-    weaknesses: [
-      "Scrolls fast without checking details",
-      "Can be tempted by exclusive rewards",
-      "May trust popular-looking accounts too quickly"
+    habits: [
+      "Explore new feeds and make new friends",
+      "Follows creators and trend pages",
+      "Always catch on trends, fear of missing out"
     ],
-    context: "Inspect the reel, account details, and DM. Your goal is to decide the safest action before tapping any suspicious link."
+    context: "Inspect the feed, account details and direct messages. Decide the safest action without falling for the bait."
   },
 
   messages: [
