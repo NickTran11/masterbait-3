@@ -86,7 +86,7 @@ html, body{
   height: 165px;
   display: block;
   object-fit: cover;
-  object-position: center top;
+  object-position: top;
   background: #16181c;
   overflow: hidden;
 }
