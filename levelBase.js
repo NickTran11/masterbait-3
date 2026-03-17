@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const senderAvatarEl = document.getElementById("senderAvatar");
   const accountLinkEl = document.getElementById("accountLink");
 
+  const emailBodyEl = document.getElementById("emailBody");
+
   const proofBox = document.getElementById("proofBox");
   const verificationPrompt = document.getElementById("verificationPrompt");
   const verificationInput = document.getElementById("verificationInput");
@@ -150,6 +152,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (emailTimeEl) emailTimeEl.textContent = msg.time;
     if (senderAvatarEl) senderAvatarEl.textContent = msg.senderInitials;
     if (accountLinkEl) accountLinkEl.setAttribute("title", msg.inspector.linkPreview);
+
+    // NEW: Render email body if provided
+  if (emailBodyEl && msg.bodyHtml) {
+    emailBodyEl.innerHTML = `
+      <div class="email-logo">PhishGuard Mail</div>
+      ${msg.bodyHtml}
+    `;
+  }
   }
 
   function renderHints() {

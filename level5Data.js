@@ -31,6 +31,16 @@ window.LEVEL5_EMAIL = {
       previewBottom: "Check This!",
       external: true,
       suspicious: true,
+
+      bodyHtml: `
+        <p>Hello Cristiana,</p>
+        <p>Congratulations! You have been selected as one of today’s lucky Amazon customers.</p>
+        <p>You are eligible to claim a <strong>$100 Amazon gift card</strong> if you confirm your account now.</p>
+        <p>We only have a few claim spots left today, so please act quickly before your reward expires.</p>
+        <p>To confirm your eligibility, click <a href="#">Claim Reward</a>.</p>
+        <p>Thank you,<br>Amazon Rewards Team</p>
+      `,
+
       inspector: {
         returnPath: "bounce-4801@mailer.amazon-claim-notice.net",
         replyTo: "support@amazon-prize-claims-help.com",
