@@ -8,6 +8,64 @@
   <link rel="stylesheet" href="./fishCoach.css" />
 </head>
 <body>
+  <!-- ===== Scenario intro overlay ===== -->
+  <div id="scenarioOverlay" class="scenario-overlay" aria-hidden="false">
+    <div class="scenario-card">
+      <div class="paperclip" aria-hidden="true"></div>
+
+      <div class="scenario-photo-wrap">
+        <div class="scenario-photo">
+          <div class="photo-placeholder">BT</div>
+        </div>
+      </div>
+
+      <div class="scenario-name" id="scenarioName">BACH TRAN</div>
+
+      <div class="scenario-meta">
+        <div class="meta-row">
+          <span class="meta-label">TITLE:</span>
+          <span id="scenarioTitle">IT Student Intern</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">DESCRIPTION:</span>
+          <span id="scenarioDescription">
+            You are checking your school inbox during a busy evening and receive a reward email claiming you won an Amazon gift card.
+          </span>
+        </div>
+      </div>
+
+      <div class="scenario-grid">
+        <div class="scenario-col">
+          <div class="scenario-section-title">STRENGTHS</div>
+          <ul id="scenarioStrengths" class="scenario-list">
+            <li>Careful reader</li>
+            <li>Knows common online scams</li>
+            <li>Will inspect links before trusting them</li>
+          </ul>
+        </div>
+
+        <div class="scenario-col">
+          <div class="scenario-section-title">WEAKNESSES</div>
+          <ul id="scenarioWeaknesses" class="scenario-list">
+            <li>Can be tempted by urgent rewards</li>
+            <li>May act too fast when tired</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="scenario-context-block">
+        <div class="scenario-section-title">MISSION CONTEXT</div>
+        <p id="scenarioContext">
+          Your goal is to decide whether this email is legitimate or a phishing attempt. Inspect the sender, message tone, and the real destination of the link before acting.
+        </p>
+      </div>
+
+      <div class="scenario-actions">
+        <button id="beginMissionBtn" class="begin-mission-btn">Begin Mission</button>
+      </div>
+    </div>
+  </div>
+
   <div class="level-shell">
     <header class="mail-topbar">
       <div class="top-left">
@@ -23,7 +81,6 @@
         <button class="icon-btn" aria-label="Notifications">🔔</button>
         <button class="icon-btn" aria-label="Settings">⚙️</button>
 
-        <!-- ✅ fixed exit link -->
         <a href="./levelMap.html" class="exit-link" aria-label="Exit level" title="Exit level">
           EXIT
         </a>
