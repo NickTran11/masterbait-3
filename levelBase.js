@@ -76,18 +76,25 @@
   }
 
 function bindScenarioStart() {
-  if (!beginMissionBtn || !scenarioOverlay) return;
+  if (beginMissionBtn && scenarioOverlay) {
+    beginMissionBtn.addEventListener("click", () => {
+      scenarioOverlay.style.opacity = "0";
+      scenarioOverlay.style.transition = "opacity 0.3s ease";
 
-  beginMissionBtn.addEventListener("click", () => {
-    // fade out animation
-    scenarioOverlay.style.opacity = "0";
-    scenarioOverlay.style.transition = "opacity 0.3s ease";
+      setTimeout(() => {
+        scenarioOverlay.style.display = "none";
+        scenarioOverlay.setAttribute("aria-hidden", "true");
+      }, 300);
+    });
+  }
 
-    setTimeout(() => {
-      scenarioOverlay.style.display = "none";  // completely remove overlay
-      scenarioOverlay.setAttribute("aria-hidden", "true");
-    }, 300);
-  });
+  if (openDossierBtn && scenarioOverlay) {
+    openDossierBtn.addEventListener("click", () => {
+      scenarioOverlay.style.display = "grid";
+      scenarioOverlay.style.opacity = "1";
+      scenarioOverlay.setAttribute("aria-hidden", "false");
+    });
+  }
 }
 
   function renderMessageList() {
