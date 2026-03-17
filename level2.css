@@ -24,129 +24,149 @@ html, body{
 
 .hidden{ display:none !important; }
 
-/* ===== dossier ===== */
+/* ================= DOSSIER ================= */
 .scenario-overlay{
-  position:fixed;
-  inset:0;
-  display:grid;
-  place-items:center;
-  background:rgba(10,12,16,0.82);
-  z-index:10000;
-  padding:24px;
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06), transparent 30%),
+    rgba(13, 14, 18, 0.84);
+  z-index: 10000;
+  padding: 24px;
 }
 
 .scenario-card{
-  position:relative;
-  width:min(560px,92vw);
-  background:#e7dbc3;
-  color:#2f2a24;
-  border:1px solid #b5a78b;
-  box-shadow:0 20px 45px rgba(0,0,0,0.35);
-  padding:24px 24px 20px;
-  transform:rotate(-0.5deg);
+  position: relative;
+  width: min(600px, 95vw);   /* bigger width */
+  background: linear-gradient(180deg, #e8dcc4, #d9cbb0);
+  color: #2f2a24;
+  border: 1px solid #b5a78b;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+  padding: 28px 28px 24px;   /* more spacing */
+  transform: rotate(-0.5deg) scale(1.15);  /* BIGGER */
 }
 
 .paperclip{
-  position:absolute;
-  left:-8px;
-  top:28px;
-  width:22px;
-  height:42px;
-  border:3px solid #8c877f;
-  border-right-color:transparent;
-  border-radius:16px;
-  transform:rotate(-10deg);
+  position: absolute;
+  left: -8px;
+  top: 22px;
+  width: 22px;
+  height: 42px;
+  border: 3px solid #8c877f;
+  border-right-color: transparent;
+  border-radius: 16px;
+  transform: rotate(-10deg);
 }
 
 .scenario-photo-wrap{
-  display:flex;
-  justify-content:center;
-  margin-bottom:14px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
 }
 
 .scenario-polaroid{
-  width:185px;
-  background:#f5efe3;
-  padding:10px 10px 24px;
-  box-shadow:0 5px 10px rgba(0,0,0,0.12);
-  border:1px solid #b8ae9f;
-  overflow:hidden;
+  width: 185px;
+  background: #f5efe3;
+  padding: 10px 10px 24px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.12);
+  border: 1px solid #b8ae9f;
+  overflow: hidden;
 }
 
-.scenario-photo{
-  width:165px;
-  height:165px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(180deg,#2e3440,#16181c);
-  color:#ececec;
-  font-size:42px;
-  font-weight:800;
-  letter-spacing:.08em;
+.scenario-photo-img{
+  width: 165px;
+  height: 165px;
+  display: block;
+  object-fit: cover;
+  object-position: top;
+  background: #16181c;
+  overflow: hidden;
 }
 
 .scenario-name{
-  font-size:30px;
-  font-weight:800;
-  letter-spacing:.02em;
-  margin-bottom:8px;
+  font-size: 30px;
+  font-weight: 800;
 }
 
 .scenario-divider{
-  height:1px;
-  background:#b8aa8d;
-  margin:8px 0 10px;
+  height: 1px;
+  background: #b8aa8d;
+  margin: 8px 0 10px;
 }
 
 .scenario-meta{
-  font-size:15px;
-  line-height:1.6;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
-.meta-row{ margin-bottom:6px; }
-.meta-label{ font-weight:800; }
+.meta-row{
+  margin-bottom: 6px;
+}
+
+.meta-label{
+  font-weight: 800;
+}
+
+.meta-value{
+  color: #2f2a24;
+}
 
 .scenario-columns{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.scenario-column{
+  min-width: 0;
 }
 
 .scenario-section-title{
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:.06em;
-  margin-bottom:6px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
 }
 
 .scenario-list{
-  margin:0;
-  padding-left:18px;
-  font-size:15px;
-  line-height:1.6;
+  margin: 0;
+  padding-left: 18px;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .scenario-context{
-  font-size:14px;
-  line-height:1.6;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.scenario-context p{
+  margin: 0;
 }
 
 .scenario-actions{
-  display:flex;
-  justify-content:flex-end;
-  margin-top:14px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
 }
 
 .begin-mission-btn{
-  border:none;
-  background:#2f2a24;
-  color:#f6efe2;
-  padding:14px 22px;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:700;
-  font-size:15px;
+  border: none;
+  background: #2f2a24;
+  color: #f6efe2;
+  padding: 14px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
 }
+
+.begin-mission-btn:hover{
+  filter: brightness(1.08);
+}
+
 
 /* ===== main layout ===== */
 .level-shell{
