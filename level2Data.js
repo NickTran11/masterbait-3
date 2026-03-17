@@ -10,7 +10,6 @@ window.LEVEL2_EMAIL = {
     ],
     habits: [
       "Explore new feeds and make new friends",
-      "Follows creators and trend pages",
       "Always catch on trends, fear of missing out"
     ],
     context: "Inspect the feed, account details and direct messages. Decide the safest action without falling for the bait."
