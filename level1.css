@@ -45,13 +45,13 @@ html, body{
 
 .scenario-card{
   position: relative;
-  width: min(420px, 92vw);
+  width: min(600px, 95vw);   /* bigger width */
   background: #e7dbc3;
   color: #2f2a24;
   border: 1px solid #b5a78b;
-  box-shadow: 0 20px 45px rgba(0,0,0,0.35);
-  padding: 18px 18px 16px;
-  transform: rotate(-0.7deg);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+  padding: 28px 28px 24px;   /* more spacing */
+  transform: rotate(-0.5deg) scale(1.15);  /* BIGGER */
 }
 
 .paperclip{
@@ -92,10 +92,8 @@ html, body{
 }
 
 .scenario-name{
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 800;
-  letter-spacing: 0.02em;
-  margin-bottom: 8px;
 }
 
 .scenario-divider{
@@ -105,8 +103,8 @@ html, body{
 }
 
 .scenario-meta{
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .meta-row{
@@ -141,8 +139,8 @@ html, body{
 .scenario-list{
   margin: 0;
   padding-left: 18px;
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .scenario-context{
@@ -164,10 +162,11 @@ html, body{
   border: none;
   background: #2f2a24;
   color: #f6efe2;
-  padding: 11px 16px;
-  border-radius: 8px;
+  padding: 14px 22px;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: 700;
+  font-size: 15px;
 }
 
 .begin-mission-btn:hover{
