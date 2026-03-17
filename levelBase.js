@@ -1,5 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const data = window.LEVEL1_EMAIL;
+  const data =
+  window.LEVEL1_EMAIL ||
+  window.LEVEL2_EMAIL ||
+  window.LEVEL3_EMAIL ||
+  window.LEVEL4_EMAIL ||
+  window.LEVEL5_EMAIL;
   if (!data || !data.messages || !data.messages.length) return;
 
   const scenarioOverlay = document.getElementById("scenarioOverlay");
