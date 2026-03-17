@@ -1,4 +1,21 @@
 window.LEVEL1_EMAIL = {
+  scenario: {
+    codename: "BACH TRAN",
+    title: "IT Student Intern",
+    description: "You are checking your school inbox during a busy evening and receive a reward email claiming you won an Amazon gift card.",
+    strengths: [
+      "Careful reader",
+      "Knows common online scams",
+      "Will inspect links before trusting them"
+    ],
+    weaknesses: [
+      "Can be tempted by urgent rewards",
+      "May act too fast when tired"
+    ],
+    context: "Your goal is to decide whether this email is legitimate or a phishing attempt. Inspect the sender, message tone, and the real destination of the link before acting.",
+    initials: "BT"
+  },
+
   folderName: "Inbox",
   messages: [
     {
