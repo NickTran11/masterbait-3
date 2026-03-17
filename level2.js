@@ -383,24 +383,24 @@ const conversationAvatar = document.getElementById("conversationAvatar");
   }
 
   function addClue(text) {
-    if (!clueLog || clueSet.has(text)) return;
-    clueSet.add(text);
+  if (!clueLog || clueSet.has(text)) return;
+  clueSet.add(text);
 
-    const empty = clueLog.querySelector(".clue-empty");
-    if (empty) clueLog.innerHTML = "";
+  const empty = clueLog.querySelector(".clue-empty");
+  if (empty) clueLog.innerHTML = "";
 
-    const chip = document.createElement("div");
-    chip.className = "clue-chip";
-    chip.textContent = text;
-    clueLog.appendChild(chip);
-  }
+  const chip = document.createElement("div");
+  chip.className = "clue-chip";
+  chip.textContent = text;
+  clueLog.appendChild(chip);
+}
 
-  function escapeHtml(str) {
-    return String(str)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#39;");
-  }
+function escapeHtml(str) {
+  return String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
 });
