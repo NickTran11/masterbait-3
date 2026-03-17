@@ -3,7 +3,7 @@ const LEVELS = {
   "1": {
     title: "Level 1 — Mass Phishing",
     objectives: [
-      "Experience one of the most common phishing",
+      "Encounter one of the most common phishing",
       "Understand how to deal with the situation"
     ],
     unlocked: true
