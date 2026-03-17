@@ -1,1 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Phisher Bait - Level 1</title>
+  <link rel="stylesheet" href="./level1.css" />
+  <link rel="stylesheet" href="./fishCoach.css" />
+</head>
+<body>
+  <!-- ===================== DOSSIER / SCENARIO INTRO ===================== -->
+  <div id="scenarioOverlay" class="scenario-overlay" aria-hidden="false">
+    <div class="scenario-card">
+      <div class="paperclip" aria-hidden="true"></div>
 
+      <div class="scenario-photo-wrap">
+        <div class="scenario-polaroid">
+          <img src="./Sophie%20Blue.png" alt="Sophie Blue" class="scenario-photo-img" id="scenarioPhotoImg">
+        </div>
+      </div>
+
+      <div class="scenario-name" id="scenarioName">SOPHIE BLUE</div>
+
+      <div class="scenario-divider"></div>
+
+      <div class="scenario-meta">
+        <div class="meta-row">
+          <span class="meta-label">TITLE:</span>
+          <span class="meta-value" id="scenarioTitle">High School Student</span>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">DESCRIPTION:</span>
+          <span class="meta-value" id="scenarioDescription">
+            You are Sophie Blue, checking your email in your bedroom and receive a reward email claiming you won an Amazon gift card.
+          </span>
+        </div>
+      </div>
+
+      <div class="scenario-divider"></div>
+
+      <div class="scenario-columns">
+        <div class="scenario-column">
+          <div class="scenario-section-title">PROFILE</div>
+          <ul id="scenarioProfile" class="scenario-list">
+            <li>Active on social media</li>
+            <li>Love shopping, makeup and boyfriend</li>
+            <li>Online shopping on Amazon a lot</li>
+          </ul>
+        </div>
+
+        <div class="scenario-column">
+          <div class="scenario-section-title">HABITS</div>
+          <ul id="scenarioHabits" class="scenario-list">
+            <li>Allow any cookie data that pops up</li>
+            <li>Use discount, gift card, reward to buy things</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="scenario-divider"></div>
+
+      <div class="scenario-context">
+        <div class="scenario-section-title">MISSION CONTEXT</div>
+        <p id="scenarioContext">
+          Your goal is to decide whether this email is legitimate or a phishing attempt. Inspect the sender, message tone, and the real destination of the link before acting.
+        </p>
+      </div>
+
+      <div class="scenario-actions">
+        <button id="beginMissionBtn" type="button" class="begin-mission-btn" onclick="beginLevelMission()">Begin Mission</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== MAIN LEVEL ===================== -->
+  <div id="levelShell" class="level-shell">
+    <header class="mail-topbar">
+      <div class="top-left">
+        <div class="email-badge">EMAIL</div>
+        <div class="product-name">Phisher Bait</div>
+      </div>
+
+      <div class="top-search-wrap">
+        <input class="top-search" type="text" placeholder="Search" />
+      </div>
+
+      <div class="top-right">
+        <button class="icon-btn" aria-label="Notifications">🔔</button>
+        <button class="icon-btn" aria-label="Settings">⚙️</button>
+        <a href="./levelMap.html" class="exit-link" aria-label="Exit level" title="Exit level">EXIT</a>
+        <button class="icon-btn dossier-btn" id="openDossierBtn" type="button" aria-label="Open dossier" title="Open dossier" onclick="openLevelDossier()">👤</button>
+      </div>
+    </header>
+
+    <div class="mail-toolbar">
+      <button class="primary-btn">New mail</button>
+      <button class="toolbar-btn">Delete</button>
+      <button class="toolbar-btn">Archive</button>
+      <button class="toolbar-btn">Junk</button>
+      <button class="toolbar-btn">Sweep</button>
+      <button class="toolbar-btn">Move to</button>
+      <button class="toolbar-btn">Categorize</button>
+      <button class="toolbar-btn">More</button>
+    </div>
+
+    <main class="mail-layout">
+      <aside class="app-rail">
+        <button class="rail-btn active">📧</button>
+        <button class="rail-btn">📅</button>
+        <button class="rail-btn">👥</button>
+        <button class="rail-btn">☁️</button>
+      </aside>
+
+      <aside class="folder-pane">
+        <div class="folder-header">Favorites</div>
+        <div class="folder-item active">Inbox <span class="count">1</span></div>
+        <div class="folder-item">Sent Items</div>
+        <div class="folder-item">Drafts</div>
+        <div class="folder-item">Deleted Items</div>
+        <div class="folder-item">Junk Email</div>
+        <div class="folder-item">Archive</div>
+
+        <div class="folder-header mt">sophieblue133@email.com</div>
+        <div class="folder-item active">Inbox <span class="count">1</span></div>
+        <div class="folder-item">Drafts</div>
+        <div class="folder-item">Sent Items</div>
+      </aside>
+
+      <section class="message-list-pane">
+        <div class="list-header">
+          <div class="list-title">Inbox</div>
+          <div class="list-tools">⟲ ⤢ ⌕</div>
+        </div>
+
+        <div class="message-group-label">Today</div>
+        <div id="messageList"></div>
+      </section>
+
+      <section class="reading-pane">
+        <div class="reading-subject" id="readingSubject">Loading...</div>
+
+        <div class="reading-meta">
+          <div class="sender-row">
+            <div class="avatar" id="senderAvatar">AM</div>
+
+            <div class="sender-meta">
+              <div class="sender-name-line">
+                <span class="sender-name suspicious" id="fromName">Amazon Rewards Center</span>
+                <span class="sender-address suspicious" id="fromEmail">&lt;offers@amazon-reward-center-mail.com&gt;</span>
+              </div>
+              <div class="to-line">
+                To: <span id="toEmail">Sophie Blue</span>
+              </div>
+            </div>
+
+            <div class="reading-time" id="emailTime">Sun 3/15/2026 9:52 PM</div>
+          </div>
+        </div>
+
+        <div class="blocked-bar">
+          Some content in this message has been blocked because the sender isn't in your Safe senders list.
+          <button class="small-action">Trust sender</button>
+          <button class="small-action">Show blocked content</button>
+        </div>
+
+        <div class="external-warning">
+          <strong>CAUTION - EXTERNAL EMAIL</strong>
+          This e-mail has originated from outside of the organization. Do not respond, click on links,
+          or open attachments unless you recognize the sender or know the content is safe.
+        </div>
+
+        <article class="email-canvas">
+          <div class="email-card">
+            <div class="email-brand-bar"></div>
+
+            <div class="email-body">
+              <div class="email-logo">Amazon Logo</div>
+
+              <p>Hello Sophie Blue,</p>
+
+              <p>
+                Congratulations! You have been selected as one of today’s lucky Amazon customers.
+                You are eligible to claim a
+                <span class="suspicious hintable">$100 gift card</span>
+                if you confirm your account now.
+              </p>
+
+              <p>
+                We only have a few claim spots left today, so please act quickly before your reward expires.
+              </p>
+
+              <p>
+                To confirm your eligibility, click
+                <a href="#" class="email-link hintable suspicious" id="accountLink">Claim Reward</a>.
+              </p>
+
+              <p>
+                Thank you,<br>
+                Amazon Rewards Team
+              </p>
+            </div>
+
+            <div class="email-footer-bar"></div>
+          </div>
+        </article>
+
+        <section class="inspector-panel">
+          <div class="inspector-title">Security Inspector</div>
+          <div class="inspector-grid">
+            <div class="inspector-item">
+              <div class="inspector-label">Return-Path</div>
+              <div class="inspector-value suspicious hintable">
+                bounce-4801@mailer.amazon-claim-notice.net
+              </div>
+            </div>
+
+            <div class="inspector-item">
+              <div class="inspector-label">Reply-To</div>
+              <div class="inspector-value suspicious hintable">
+                support@amazon-prize-claims-help.com
+              </div>
+            </div>
+
+            <div class="inspector-item">
+              <div class="inspector-label">Link Preview</div>
+              <div class="inspector-value suspicious hintable">
+                https://amazon-gift-claim-center.com/reward/confirm
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="hint-panel">
+          <div class="hint-panel-top">
+            <div class="hint-title">Investigation Hints</div>
+            <button id="revealHintBtn" class="reveal-hint-btn">Reveal next hint</button>
+          </div>
+
+          <div id="hintList" class="hint-list"></div>
+        </section>
+
+        <section class="action-panel">
+          <div class="action-title">What should the player do?</div>
+
+          <div class="action-cards">
+            <button class="action-card good" data-action="report">
+              <div class="action-icon">🚩</div>
+              <div class="action-copy">
+                <div class="action-name">Report phishing</div>
+                <div class="action-desc">Send to security / report as suspicious</div>
+              </div>
+            </button>
+
+            <button class="action-card okay" data-action="callit">
+              <div class="action-icon">📞</div>
+              <div class="action-copy">
+                <div class="action-name">Verify officially</div>
+                <div class="action-desc">Use Amazon’s real website or official support</div>
+              </div>
+            </button>
+
+            <button class="action-card bad" data-action="click">
+              <div class="action-icon">🔗</div>
+              <div class="action-copy">
+                <div class="action-name">Click the link</div>
+                <div class="action-desc">Open the message link "Claim Reward" directly</div>
+              </div>
+            </button>
+
+            <button class="action-card bad" data-action="reply">
+              <div class="action-icon">↩</div>
+              <div class="action-copy">
+                <div class="action-name">Reply to sender</div>
+                <div class="action-desc">Ask for more details by email</div>
+              </div>
+            </button>
+          </div>
+
+          <div class="action-note">
+            Goal: inspect sender details, pressure wording, and link destination before deciding.
+          </div>
+
+          <div id="decisionFeedback" class="decision-feedback hidden"></div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="clue-drawer">
+      <div class="clue-title">Clue Log</div>
+      <div id="clueLog" class="clue-log">
+        <div class="clue-empty">Clues only appear when you reveal hints or complete important steps.</div>
+      </div>
+    </footer>
+  </div>
+
+  <div id="fishCoachOverlay" class="fish-overlay hidden" aria-hidden="true">
+    <div class="fish-fullscreen">
+      <div class="fish-image-wrapper">
+        <img src="./Fish%20game%20char.png" alt="Fish Coach" class="fish-image">
+        <div class="speech-bubble">
+          <div id="fishText"></div>
+        </div>
+      </div>
+
+      <div class="fish-panel">
+        <h2 id="fishTitle">Feedback</h2>
+        <div id="fishLessons" class="fish-lessons"></div>
+
+        <div id="proofBox" class="proof-box hidden">
+          <div class="proof-title">Proof of understanding</div>
+          <div id="verificationPrompt" class="proof-text"></div>
+
+          <input id="verificationInput"
+                 class="proof-input"
+                 type="text"
+                 placeholder="Type the safe official domain here" />
+
+          <div id="verificationHelp" class="proof-help"></div>
+
+          <div class="proof-actions">
+            <button id="verifySubmitBtn" class="proof-btn">Submit answer</button>
+          </div>
+
+          <div id="verificationResult" class="proof-result"></div>
+        </div>
+
+        <button id="fishCloseBtn">Continue</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  function beginLevelMission() {
+    const overlay = document.getElementById("scenarioOverlay");
+    if (!overlay) return;
+
+    overlay.style.opacity = "0";
+    overlay.style.transition = "opacity 0.25s ease";
+
+    setTimeout(() => {
+      overlay.style.display = "none";
+      overlay.setAttribute("aria-hidden", "true");
+    }, 250);
+  }
+
+  function openLevelDossier() {
+    const overlay = document.getElementById("scenarioOverlay");
+    if (!overlay) return;
+
+    overlay.style.display = "grid";
+    overlay.style.opacity = "1";
+    overlay.setAttribute("aria-hidden", "false");
+  }
+</script>
+
+<script src="./fishCoach.js"></script>
+<script src="./level1Data.js"></script>
+<script src="./levelBase.js"></script>
+</body>
+</html>
