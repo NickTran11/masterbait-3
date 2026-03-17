@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // NEW: Render email body if provided
   if (emailBodyEl && msg.bodyHtml) {
     emailBodyEl.innerHTML = `
-      <div class="email-logo">PhishGuard Mail</div>
+      <div class="email-logo">PhisherBait Mail</div>
       ${msg.bodyHtml}
     `;
   }
