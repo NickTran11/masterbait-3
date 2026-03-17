@@ -81,7 +81,7 @@ const conversationAvatar = document.getElementById("conversationAvatar");
 
     if (scenarioStrengths) {
       scenarioStrengths.innerHTML = "";
-      (s.strengths || []).forEach(item => {
+      (s.profile || []).forEach(item => {
         const li = document.createElement("li");
         li.textContent = item;
         scenarioStrengths.appendChild(li);
@@ -90,7 +90,7 @@ const conversationAvatar = document.getElementById("conversationAvatar");
 
     if (scenarioWeaknesses) {
       scenarioWeaknesses.innerHTML = "";
-      (s.weaknesses || []).forEach(item => {
+      (s.habits || []).forEach(item => {
         const li = document.createElement("li");
         li.textContent = item;
         scenarioWeaknesses.appendChild(li);
