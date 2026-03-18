@@ -147,57 +147,60 @@ const reels = [
 
     const counter = document.createElement("div");
     counter.className = "reel-counter";
-    counter.textContent = `${activeReelIndex + 1} / ${reels.length}`;
+    counter.textContent = `${activeReelIndex + 1}/${reels.length}`;
     reelSlide.appendChild(counter);
 
     if (reel.type === "video") {
-  const video = document.createElement("video");
-  video.className = "reel-asset reel-video";
-  video.autoplay = true;
-  video.muted = true;   // start muted so autoplay works
-  video.loop = true;
-  video.playsInline = true;
-  video.preload = "auto";
-  video.setAttribute("webkit-playsinline", "true");
-  video.setAttribute("playsinline", "true");
+      const video = document.createElement("video");
+      video.className = "reel-asset reel-video";
+      video.src = reel.src;
+      video.autoplay = true;
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.preload = "auto";
+      video.setAttribute("playsinline", "true");
+      video.setAttribute("webkit-playsinline", "true");
 
-  const source = document.createElement("source");
-  source.src = reel.src;
-  source.type = "video/mov";
-  video.appendChild(source);
+      const soundBtn = document.createElement("button");
+      soundBtn.className = "reel-sound-btn";
+      soundBtn.type = "button";
+      soundBtn.textContent = "🔇";
 
-  const soundBtn = document.createElement("button");
-  soundBtn.className = "reel-sound-btn";
-  soundBtn.textContent = "🔇";
-  soundBtn.type = "button";
+      soundBtn.addEventListener("click", () => {
+        video.muted = !video.muted;
+        soundBtn.textContent = video.muted ? "🔇" : "🔊";
+      });
 
-  soundBtn.addEventListener("click", () => {
-    video.muted = !video.muted;
-    soundBtn.textContent = video.muted ? "🔇" : "🔊";
-  });
+      video.addEventListener("loadeddata", () => {
+        // keep reel visible once first frame loads
+      });
 
-  video.addEventListener("error", () => {
-    reelSlide.innerHTML = `
-      <div class="reel-loading">
-        Video could not load.
-      </div>
-    `;
-  });
+      video.addEventListener("error", () => {
+        console.error("Video failed to load:", reel.src);
+        const fallback = document.createElement("div");
+        fallback.className = "reel-loading";
+        fallback.textContent = "Video could not load";
+        reelSlide.appendChild(fallback);
+      });
 
-  reelSlide.appendChild(video);
-  reelSlide.appendChild(soundBtn);
+      reelSlide.appendChild(video);
+      reelSlide.appendChild(soundBtn);
 
-  const playPromise = video.play();
-  if (playPromise && typeof playPromise.catch === "function") {
-    playPromise.catch(() => {
-      reelSlide.innerHTML = `
-        <div class="reel-loading">
-          Tap to play video
-        </div>
-      `;
-    });
-  }
-} else {
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch((err) => {
+          console.warn("Autoplay blocked or failed:", err);
+          // keep video visible; user can still tap sound button later
+        });
+      }
+    } else {
+      const img = document.createElement("img");
+      img.className = "reel-asset reel-image";
+      img.src = reel.src;
+      img.alt = "Social media reel";
+      reelSlide.appendChild(img);
+    }
   }
 
   if (reelChip) reelChip.textContent = reel.chip;
