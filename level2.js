@@ -19,12 +19,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const scenarioWeaknesses = document.getElementById("scenarioWeaknesses");
   const scenarioContext = document.getElementById("scenarioContext");
 
-  const postAccountName = document.getElementById("postAccountName");
-  const postCaption = document.getElementById("postCaption");
-  const bioPreview = document.getElementById("bioPreview");
-  const dmMessage = document.getElementById("dmMessage");
-  const dmLink = document.getElementById("dmLink");
-  const commentCount = document.getElementById("commentCount");
+  const reelSlide = document.getElementById("reelSlide");
+const reelChip = document.getElementById("reelChip");
+const reelAvatar = document.getElementById("reelAvatar");
+const postAccountName = document.getElementById("postAccountName");
+const postMeta = document.getElementById("postMeta");
+const postCaption = document.getElementById("postCaption");
+const bioPreview = document.getElementById("bioPreview");
+const dmMessage = document.getElementById("dmMessage");
+const dmLink = document.getElementById("dmLink");
+const commentCount = document.getElementById("commentCount");
+
+const reelPrevBtn = document.getElementById("reelPrevBtn");
+const reelNextBtn = document.getElementById("reelNextBtn");
 
   const inspectorUser = document.getElementById("inspectorUser");
   const inspectorAge = document.getElementById("inspectorAge");
@@ -56,6 +63,40 @@ const conversationAvatar = document.getElementById("conversationAvatar");
 
   const clueSet = new Set();
   let activeMessage = data.messages[0];
+let activeReelIndex = 0;
+
+const reels = [
+  {
+    type: "video",
+    src: "./reel1.mp4",
+    chip: "LIVE GIVEAWAY",
+    avatar: "TG",
+    accountName: "trend.giveaway_now",
+    meta: "Sponsored reel · just now",
+    caption: "Last 100 winners only 🎁 Comment “WIN” and tap the link in bio to claim your gift card now.",
+    bio: "Link in bio: prize-claim-fast.net/winner"
+  },
+  {
+    type: "video",
+    src: "./reel2.mp4",
+    chip: "CREATOR DROP",
+    avatar: "TG",
+    accountName: "trend.giveaway_now",
+    meta: "Sponsored reel · 3m ago",
+    caption: "Exclusive creator reward unlocked 🔥 Tap now before this page disappears.",
+    bio: "Link in bio: creator-prize-access.com/claim"
+  },
+  {
+    type: "image",
+    src: "./reel3.png",
+    chip: "PROMO POST",
+    avatar: "TG",
+    accountName: "trend.giveaway_now",
+    meta: "Sponsored post · 8m ago",
+    caption: "Special promo image. Check comments and bio to claim your reward.",
+    bio: "Link in bio: prize-claim-fast.net/winner"
+  }
+];
   let revealedHintCount = 0;
   let retryCount = 0;
   let waitingForProof = false;
@@ -99,17 +140,50 @@ const conversationAvatar = document.getElementById("conversationAvatar");
   }
 
   function renderFeed() {
-    if (postAccountName) postAccountName.textContent = activeMessage.postAccountName;
-    if (postCaption) postCaption.textContent = activeMessage.postCaption;
-    if (bioPreview) bioPreview.textContent = activeMessage.bioPreview;
-    if (dmMessage) dmMessage.textContent = activeMessage.dmMessage;
-    if (dmLink) dmLink.textContent = activeMessage.dmLink;
-    if (commentCount) commentCount.textContent = activeMessage.commentCount;
+  const reel = reels[activeReelIndex];
 
-    if (inspectorUser) inspectorUser.textContent = activeMessage.inspector.username;
-    if (inspectorAge) inspectorAge.textContent = activeMessage.inspector.profileAge;
-    if (inspectorLink) inspectorLink.textContent = activeMessage.inspector.linkInBio;
+  if (reelSlide) {
+    reelSlide.innerHTML = "";
+
+    const counter = document.createElement("div");
+    counter.className = "reel-counter";
+    counter.textContent = `${activeReelIndex + 1} / ${reels.length}`;
+    reelSlide.appendChild(counter);
+
+    if (reel.type === "video") {
+      const video = document.createElement("video");
+      video.className = "reel-asset reel-video";
+      video.src = reel.src;
+      video.autoplay = true;
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.setAttribute("webkit-playsinline", "true");
+      reelSlide.appendChild(video);
+    } else {
+      const img = document.createElement("img");
+      img.className = "reel-asset reel-image";
+      img.src = reel.src;
+      img.alt = "Social media reel";
+      reelSlide.appendChild(img);
+    }
   }
+
+  if (reelChip) reelChip.textContent = reel.chip;
+  if (reelAvatar) reelAvatar.textContent = reel.avatar;
+  if (postAccountName) postAccountName.textContent = reel.accountName;
+  if (postMeta) postMeta.textContent = reel.meta;
+  if (postCaption) postCaption.textContent = reel.caption;
+  if (bioPreview) bioPreview.textContent = reel.bio;
+
+  if (dmMessage) dmMessage.textContent = activeMessage.dmMessage;
+  if (dmLink) dmLink.textContent = activeMessage.dmLink;
+  if (commentCount) commentCount.textContent = activeMessage.commentCount;
+
+  if (inspectorUser) inspectorUser.textContent = activeMessage.inspector.username;
+  if (inspectorAge) inspectorAge.textContent = activeMessage.inspector.profileAge;
+  if (inspectorLink) inspectorLink.textContent = activeMessage.inspector.linkInBio;
+}
 
   function renderHints() {
     if (!hintList || !revealHintBtn) return;
@@ -156,8 +230,22 @@ const conversationAvatar = document.getElementById("conversationAvatar");
       });
     }
   }
-
+  
   function bindFeedButtons() {
+      if (reelPrevBtn) {
+    reelPrevBtn.addEventListener("click", () => {
+      activeReelIndex = (activeReelIndex - 1 + reels.length) % reels.length;
+      renderFeed();
+    });
+  }
+
+  if (reelNextBtn) {
+    reelNextBtn.addEventListener("click", () => {
+      activeReelIndex = (activeReelIndex + 1) % reels.length;
+      renderFeed();
+    });
+  }
+    
   if (messagesBubble && messagesPopup) {
     messagesBubble.addEventListener("click", () => {
       messagesPopup.classList.remove("hidden");
