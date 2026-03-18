@@ -28,29 +28,36 @@ const postCaption = document.getElementById("postCaption");
 const bioPreview = document.getElementById("bioPreview");
 const dmMessage = document.getElementById("dmMessage");
 const dmLink = document.getElementById("dmLink");
+
+const likeCount = document.getElementById("likeCount");
 const commentCount = document.getElementById("commentCount");
+const openCommentsBtn = document.getElementById("openCommentsBtn");
 
 const reelPrevBtn = document.getElementById("reelPrevBtn");
 const reelNextBtn = document.getElementById("reelNextBtn");
 
-  const inspectorUser = document.getElementById("inspectorUser");
-  const inspectorAge = document.getElementById("inspectorAge");
-  const inspectorLink = document.getElementById("inspectorLink");
+const inspectorUser = document.getElementById("inspectorUser");
+const inspectorAge = document.getElementById("inspectorAge");
+const inspectorLink = document.getElementById("inspectorLink");
 
-  const hintList = document.getElementById("hintList");
-  const revealHintBtn = document.getElementById("revealHintBtn");
-  const decisionFeedback = document.getElementById("decisionFeedback");
-  const clueLog = document.getElementById("clueLog");
+const hintList = document.getElementById("hintList");
+const revealHintBtn = document.getElementById("revealHintBtn");
+const decisionFeedback = document.getElementById("decisionFeedback");
+const clueLog = document.getElementById("clueLog");
 
-  const messagesBubble = document.getElementById("messagesBubble");
+const messagesBubble = document.getElementById("messagesBubble");
 const messagesPopup = document.getElementById("messagesPopup");
-const conversationPopup = document.getElementById("conversationPopup");
 
+const commentsPopup = document.getElementById("commentsPopup");
+const commentsList = document.getElementById("commentsList");
+const closeCommentsPopupBtn = document.getElementById("closeCommentsPopupBtn");
+
+const conversationPopup = document.getElementById("conversationPopup");
 const contactsList = document.getElementById("contactsList");
 const backToContactsBtn = document.getElementById("backToContactsBtn");
 const closeConversationBtn = document.getElementById("closeConversationBtn");
 const closeMessagesPopupBtn = document.getElementById("closeMessagesPopupBtn");
-const openDmPreviewBtn = document.getElementById("openDmPreviewBtn");
+
 const conversationName = document.getElementById("conversationName");
 const conversationAvatar = document.getElementById("conversationAvatar");
 
@@ -75,6 +82,14 @@ const reels = [
     meta: "1.3M views · Mar 16, 2026",
     caption: "All my courses are 25% OFF this week 🔥 BUY NOW BEFORE SOLD OUT 🎯",
     bio: "Investigate the creator page and their courses integrity"
+    likes: "1.1M",
+    commentCount: "14k",
+    comments: [
+      { avatar: "y", username: "yahya_lmkadmi", time: "11h", text: "Ragebait final boss", meta: "361 likes   Reply" },
+      { avatar: "d", username: "denver29519", time: "9h", text: "Explain?", meta: "Reply" },
+      { avatar: "k", username: "k.khainaa", time: "9h", text: "THE QUEEN HERSELF", meta: "127 likes   Reply" },
+      { avatar: "p", username: "pink3matter", time: "11h", text: "What is she doing rn does anyone know", meta: "52 likes   Reply" }
+    ]
   },
   {
     type: "video",
@@ -85,6 +100,14 @@ const reels = [
     meta: "53 views · 23h ago",
     caption: "Interact and play with the reel 😝",
     bio: "Investigate the creator page and their reel integrity"
+    likes: "10",
+    commentCount: "4",
+    comments: [
+      { avatar: "a", username: "ashley.edittts", time: "7h", text: "This trend is everywhere now", meta: "41 likes   Reply" },
+      { avatar: "m", username: "mika.flow", time: "6h", text: "Why does the page keep asking people to click out?", meta: "19 likes   Reply" },
+      { avatar: "r", username: "rio_vfx", time: "4h", text: "The account looks copied from other creators", meta: "28 likes   Reply" },
+      { avatar: "s", username: "sunniepop", time: "2h", text: "Something feels off about this reel", meta: "12 likes   Reply" }
+    ]
   },
   {
     type: "image",
@@ -95,6 +118,14 @@ const reels = [
     meta: "Sponsored post · 16m ago",
     caption: "Limited special offer 🥳 SHOP NOW 🛒",
     bio: "Investigate the creator page, advertisement and product integrity"
+    likes: "1k",
+    commentCount: "206",
+    comments: [
+      { avatar: "j", username: "jayyy_lee", time: "5h", text: "Is this even a real store?", meta: "23 likes   Reply" },
+      { avatar: "n", username: "nina.codes", time: "4h", text: "That discount is way too extreme", meta: "17 likes   Reply" },
+      { avatar: "o", username: "omarxv", time: "3h", text: "The website URL looks suspicious", meta: "31 likes   Reply" },
+      { avatar: "l", username: "lulu_draws", time: "1h", text: "I would not trust that ad", meta: "9 likes   Reply" }
+    ]
   }
 ];
   let revealedHintCount = 0;
@@ -210,13 +241,44 @@ const reels = [
   if (postCaption) postCaption.textContent = reel.caption;
   if (bioPreview) bioPreview.textContent = reel.bio;
 
-  if (dmMessage) dmMessage.textContent = activeMessage.dmMessage;
-  if (dmLink) dmLink.textContent = activeMessage.dmLink;
-  if (commentCount) commentCount.textContent = activeMessage.commentCount;
+if (dmMessage) dmMessage.textContent = activeMessage.dmMessage;
+if (dmLink) dmLink.textContent = activeMessage.dmLink;
 
-  if (inspectorUser) inspectorUser.textContent = activeMessage.inspector.username;
-  if (inspectorAge) inspectorAge.textContent = activeMessage.inspector.profileAge;
-  if (inspectorLink) inspectorLink.textContent = activeMessage.inspector.linkInBio;
+if (likeCount) likeCount.textContent = reel.likes;
+if (commentCount) commentCount.textContent = reel.commentCount;
+
+if (inspectorUser) inspectorUser.textContent = activeMessage.inspector.username;
+if (inspectorAge) inspectorAge.textContent = activeMessage.inspector.profileAge;
+if (inspectorLink) inspectorLink.textContent = activeMessage.inspector.linkInBio;
+
+renderCommentsPopup();
+}
+
+function renderCommentsPopup() {
+  if (!commentsList) return;
+
+  const reel = reels[activeReelIndex];
+  commentsList.innerHTML = "";
+
+  (reel.comments || []).forEach((comment) => {
+    const item = document.createElement("div");
+    item.className = "comment-row";
+
+    item.innerHTML = `
+      <div class="comment-avatar">${comment.avatar}</div>
+      <div class="comment-main">
+        <div class="comment-top">
+          <span class="comment-username">${comment.username}</span>
+          <span class="comment-time">${comment.time}</span>
+        </div>
+        <div class="comment-text">${comment.text}</div>
+        <div class="comment-meta">${comment.meta}</div>
+      </div>
+      <button class="comment-like-btn" type="button">♡</button>
+    `;
+
+    commentsList.appendChild(item);
+  });
 }
 
   function renderHints() {
@@ -327,12 +389,12 @@ const reels = [
   if (!conversationPopup || !messagesPopup) return;
 
   const contactMap = {
-    haydude: { name: "HayDude", avatar: "H" },
-    david: { name: "David N.", avatar: "D" },
-    understandable: { name: "under.standable_posts", avatar: "u" },
-    fortnite: { name: "Fortnite", avatar: "F" },
+    haydude: { name: "BestFriend", avatar: "BFF" },
+    david: { name: "MrLeast", avatar: "ML" },
+    understandable: { name: "FC Barcel", avatar: "B" },
+    fortnite: { name: "Fortnite Gang", avatar: "F" },
     girl: { name: "I'm just a girl 💅", avatar: "G" },
-    jada: { name: "Jada H", avatar: "J" }
+    jada: { name: "Mia Foxx", avatar: "MF" }
   };
 
   const selected = contactMap[contact] || contactMap.understandable;
