@@ -103,34 +103,33 @@
           <div class="reel-wrapper">
             <div class="reel-card">
               <div class="reel-media">
-                <div class="fake-video-bg">
-                  <div class="stadium-glow"></div>
-                  <div class="reel-person"></div>
-                </div>
+  <div class="reel-slide" id="reelSlide">
+    <!-- reel content inserted by JS -->
+  </div>
 
-                <div class="reel-overlay-top">
-                  <div class="reel-chip">LIVE GIVEAWAY</div>
-                </div>
+  <div class="reel-overlay-top">
+    <div class="reel-chip" id="reelChip">LIVE GIVEAWAY</div>
+  </div>
 
-                <div class="reel-overlay-bottom">
-                  <div class="profile-row">
-                    <div class="profile-avatar">TG</div>
-                    <div>
-                      <div class="profile-name" id="postAccountName">trend.giveaway_now</div>
-                      <div class="profile-meta">Sponsored reel · just now</div>
-                    </div>
-                    <button class="follow-btn">Follow</button>
-                  </div>
+  <div class="reel-overlay-bottom">
+    <div class="profile-row">
+      <div class="profile-avatar" id="reelAvatar">TG</div>
+      <div>
+        <div class="profile-name" id="postAccountName">trend.giveaway_now</div>
+        <div class="profile-meta" id="postMeta">Sponsored reel · just now</div>
+      </div>
+      <button class="follow-btn">Follow</button>
+    </div>
 
-                  <div class="post-caption" id="postCaption">
-                    Last 100 winners only 🎁 Comment “WIN” and tap the link in bio to claim your gift card now.
-                  </div>
+    <div class="post-caption" id="postCaption">
+      Last 100 winners only 🎁 Comment “WIN” and tap the link in bio to claim your gift card now.
+    </div>
 
-                  <div class="bio-preview" id="bioPreview">
-                    Link in bio: prize-claim-fast.net/winner
-                  </div>
-                </div>
-              </div>
+    <div class="bio-preview" id="bioPreview">
+      Link in bio: prize-claim-fast.net/winner
+    </div>
+  </div>
+</div>
 
               <div class="reel-actions">
                 <button class="social-icon">♡</button>
@@ -146,8 +145,8 @@
             </div>
 
             <div class="reel-nav">
-              <button class="nav-pill">⌃</button>
-              <button class="nav-pill">⌄</button>
+                <button class="nav-pill" id="reelPrevBtn">⌃</button>
+                <button class="nav-pill" id="reelNextBtn">⌄</button>
             </div>
           </div>
         </div>
