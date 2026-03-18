@@ -18,14 +18,14 @@ window.LEVEL2_EMAIL = {
   messages: [
     {
       id: "social-1",
-      postAccountName: "trend.giveaway_now",
-      postCaption: "Last 100 winners only 🎁 Comment “WIN” and tap the link in bio to claim your gift card now.",
-      bioPreview: "Link in bio: prize-claim-fast.net/winner",
+      postAccountName: "thorus_canva.official",
+      postCaption: "All my courses are 25% OFF this week 🔥 BUY NOW BEFORE SOLD OUT 🎯",
+      bioPreview: "Investigate the creator page and their courses integrity",
       dmMessage: "Hey Sophie, you were selected for our private winner list. Tap this secret creator link before the reward expires.",
       dmLink: "creator-prize-access.com/claim",
-      commentCount: "57",
+      commentCount: "14k",
       inspector: {
-        username: "trend.giveaway_now",
+        username: "thorus_canva.official",
         profileAge: "2 days old",
         linkInBio: "prize-claim-fast.net/winner"
       },
