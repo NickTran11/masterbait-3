@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let retryCount = 0;
   let waitingForProof = false;
   const completedMessages = new Set();
+  let levelCompleted = false;
 
   function currentMessageNeedsVerification() {
   return !!(
@@ -59,10 +60,81 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function finishCurrentMessage() {
   completedMessages.add(activeMessage.id);
+
+  if (allMessagesCompleted() && !levelCompleted) {
+    showLevelCompleteCoach();
+  }
 }
 
 function allMessagesCompleted() {
   return completedMessages.size === data.messages.length;
+}
+
+function showLevelCompleteCoach() {
+  levelCompleted = true;
+  waitingForProof = false;
+
+  hideProofBox();
+
+  const title = "Level Complete!";
+  const bubble = "Nice work.\nYou cleared this level.";
+  const lessons = [
+    "Spear phishing uses real context to feel believable.",
+    "Clone phishing imitates trusted messages or services.",
+    "Always verify the sender, domain, and destination before acting.",
+    "Not every message is malicious, so careful comparison matters.",
+    "The safest habit is to slow down and verify through official channels."
+  ];
+
+  if (window.showFishCoachCustom) {
+  window.showFishCoachCustom({
+    title,
+    bubbleText: bubble,
+    lessons
+  });
+}
+
+  const proofBox = document.getElementById("proofBox");
+  const verificationResult = document.getElementById("verificationResult");
+
+  if (proofBox) {
+    proofBox.classList.remove("hidden");
+  }
+
+  const verificationPrompt = document.getElementById("verificationPrompt");
+  const verificationInput = document.getElementById("verificationInput");
+  const verificationHelp = document.getElementById("verificationHelp");
+  const verifySubmitBtn = document.getElementById("verifySubmitBtn");
+
+  if (verificationPrompt) {
+    verificationPrompt.textContent =
+      "Review complete. Score: 0 / 3 Golden Rods";
+  }
+
+  if (verificationInput) {
+    verificationInput.style.display = "none";
+  }
+
+  if (verificationHelp) {
+    verificationHelp.textContent =
+      "Golden Rod scoring can be connected here later.";
+  }
+
+  if (verifySubmitBtn) {
+    verifySubmitBtn.style.display = "none";
+  }
+
+  if (verificationResult) {
+    verificationResult.textContent =
+      "You identified how targeted phishing can use context, urgency, and trusted brands to trick users.";
+    verificationResult.className = "proof-result success";
+  }
+
+  if (window.setFishCoachCloseHandler) {
+    window.setFishCoachCloseHandler(() => {
+      window.location.href = "./levelMap.html";
+    });
+  }
 }
 
   function init() {
@@ -254,21 +326,22 @@ function allMessagesCompleted() {
 
   addClue("Correct action chosen: Report phishing.");
   setDecisionFeedback("good", "Correct. Reporting phishing is the best action here.");
+
   showCoach("perfect", needsProof);
+
+  if (!needsProof) {
+    finishCurrentMessage();
+  }
+
   return;
 }
 
     if (isPartial) {
-      addClue("Partial credit: safer than clicking, but not the best answer.");
-      setDecisionFeedback("warn", "Safer than clicking, but not the best answer for this scenario.");
-      
-      if (!needsProof) {
-    finishCurrentMessage();
-  }
-      
-      showCoach("good", false);
-      return;
-    }
+  addClue("Partial credit: safer than clicking, but not the best answer.");
+  setDecisionFeedback("warn", "Safer than clicking, but not the best answer for this scenario.");
+  showCoach("good", false);
+  return;
+}
 
     addClue("Incorrect action chosen. Re-check sender details, urgency language, and the previewed link.");
     setDecisionFeedback("bad", "That action is risky. Reveal another hint and try again.");
@@ -276,37 +349,37 @@ function allMessagesCompleted() {
   }
 
   function showCoach(mode, withProof) {
-    if (!window.showFishCoachCustom) {
-      console.error("fishCoach.js is not loaded.");
-      return;
-    }
+  if (!window.showFishCoachCustom) {
+    console.error("fishCoach.js is not loaded.");
+    return;
+  }
 
-    const coachPayload = activeMessage.coach[mode];
-    window.showFishCoachCustom(coachPayload);
+  const coachPayload = activeMessage.coach[mode];
+  window.showFishCoachCustom(coachPayload);
 
-    if (window.setFishCoachCloseHandler) {
-  window.setFishCoachCloseHandler(() => {
-    if (waitingForProof) return;
+  if (withProof) {
+    waitingForProof = true;
+    showProofBox();
+  } else {
+    waitingForProof = false;
+    hideProofBox();
+  }
 
-    if (allMessagesCompleted()) {
-      window.location.href = "./levelMap.html";
-      return;
-    }
+  if (window.setFishCoachCloseHandler) {
+    window.setFishCoachCloseHandler(() => {
+      if (waitingForProof) return;
 
-    if (window.closeFishCoachCustom) {
-      window.closeFishCoachCustom();
-    }
-  });
+      if (levelCompleted) {
+  window.location.href = "./levelMap.html";
+  return;
 }
 
-    if (withProof) {
-      waitingForProof = true;
-      showProofBox();
-    } else {
-      waitingForProof = false;
-      hideProofBox();
-    }
+      if (window.closeFishCoachCustom) {
+        window.closeFishCoachCustom();
+      }
+    });
   }
+}
 
   function showProofBox() {
   if (!activeMessage.verification) {
@@ -351,16 +424,13 @@ function allMessagesCompleted() {
       addClue("Player correctly identified the official domain to visit manually.");
 
       waitingForProof = false;
-finishCurrentMessage();
 setDecisionFeedback("good", "Excellent. You chose the safest action and identified the correct official website.");
 
-if (window.setFishCoachCloseHandler) {
-  window.setFishCoachCloseHandler(() => {
-    if (allMessagesCompleted()) {
-      window.location.href = "./levelMap.html";
-      return;
-    }
+const wasLastMessage = completedMessages.size + 1 === data.messages.length;
+finishCurrentMessage();
 
+if (!wasLastMessage && window.setFishCoachCloseHandler) {
+  window.setFishCoachCloseHandler(() => {
     if (window.closeFishCoachCustom) {
       window.closeFishCoachCustom();
     }
