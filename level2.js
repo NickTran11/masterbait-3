@@ -366,12 +366,24 @@ function renderCreatorProfile() {
 
   if (creatorProfileGrid) {
     creatorProfileGrid.innerHTML = "";
-    (profile.grid || []).forEach((imgSrc) => {
-      const img = document.createElement("img");
-      img.src = imgSrc;
-      img.alt = "Creator post";
-      creatorProfileGrid.appendChild(img);
-    });
+    profile.grid.forEach(src => {
+  let element;
+
+  if (src.endsWith(".mov") || src.endsWith(".mp4")) {
+    element = document.createElement("video");
+    element.src = src;
+    element.autoplay = true;
+    element.loop = true;
+    element.muted = true;
+    element.playsInline = true;
+  } else {
+    element = document.createElement("img");
+    element.src = src;
+  }
+
+  element.className = "creator-grid-item";
+  gridContainer.appendChild(element);
+});
   }
 }
   
