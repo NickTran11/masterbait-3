@@ -1447,3 +1447,83 @@ html, body{
   object-fit:cover;
   display:block;
 }
+
+.conversation-thread{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding:14px 16px 18px;
+  max-height:420px;
+  overflow-y:auto;
+}
+
+.ig-message-row{
+  display:flex;
+}
+
+.ig-message-row.me{
+  justify-content:flex-end;
+}
+
+.ig-message-row.them{
+  justify-content:flex-start;
+}
+
+.ig-message-bubble{
+  max-width:78%;
+  padding:10px 14px;
+  border-radius:20px;
+  font-size:14px;
+  line-height:1.4;
+  word-break:break-word;
+}
+
+.ig-message-bubble.me{
+  background:#3797f0;
+  color:#fff;
+  border-bottom-right-radius:8px;
+}
+
+.ig-message-bubble.them{
+  background:#efefef;
+  color:#111;
+  border-bottom-left-radius:8px;
+}
+
+.ig-message-sender{
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:4px;
+  color:#555;
+}
+
+.ig-message-text{
+  white-space:pre-wrap;
+}
+
+.ig-message-link{
+  color:#0a66ff;
+  text-decoration:none;
+  font-weight:600;
+  word-break:break-all;
+}
+
+.ig-message-bubble.me .ig-message-link{
+  color:#fff;
+  text-decoration:underline;
+}
+
+.conversation-compose{
+  padding:10px 14px 14px;
+  border-top:1px solid #e8e8e8;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.conversation-emoji-btn{
+  border:none;
+  background:transparent;
+  font-size:20px;
+  cursor:pointer;
+}
