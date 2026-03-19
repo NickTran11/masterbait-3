@@ -26,13 +26,13 @@
       <div class="scenario-meta">
         <div class="meta-row">
           <span class="meta-label">TITLE:</span>
-          <span class="meta-value" id="scenarioTitle">Company CEO</span>
+          <span class="meta-value" id="scenarioTitle">Project Manager</span>
         </div>
 
         <div class="meta-row">
           <span class="meta-label">DESCRIPTION:</span>
           <span class="meta-value" id="scenarioDescription">
-            You are Cristiana Blum, checking your email in your office and receive a reward email about abc.
+            You are Cristiana Blum, you manage multiple internal projects and coordinate with IT, HR, and external vendors
           </span>
         </div>
       </div>
@@ -43,17 +43,18 @@
         <div class="scenario-column">
           <div class="scenario-section-title">PROFILE</div>
           <ul id="scenarioProfile" class="scenario-list">
-            <li>Active on social media</li>
-            <li>Love shopping, makeup and boyfriend</li>
-            <li>Online shopping on Amazon a lot</li>
+            <li>Work closely with IT, HR, and external services</li>
+            <li>Review documents and internal updates</li>
+            <li>Receives high volume of emails daily</li>
           </ul>
         </div>
 
         <div class="scenario-column">
           <div class="scenario-section-title">HABITS</div>
           <ul id="scenarioHabits" class="scenario-list">
-            <li>Allow any cookie data that pops up</li>
-            <li>Use discount, gift card, reward to buy things</li>
+            <li>Quickly scans emails due to busy schedule</li>
+            <li>Trusts emails that reference recent work activity</li>
+            <li>Occasionally click links directly instead of navigating manually</li>
           </ul>
         </div>
       </div>
@@ -63,8 +64,14 @@
       <div class="scenario-context">
         <div class="scenario-section-title">MISSION CONTEXT</div>
         <p id="scenarioContext">
-          Your goal is to decide whether this email is legitimate or a phishing attempt. Inspect the sender, message tone, and the real destination of the link before acting.
+          Your goal is is to determine which messages are legitimate and which are phishing attempts.
         </p>
+        <p>This level introduces spear phishing:</p>
+        <ul id="mission-notes">
+          <li>Some emails will reference real messages you received earlier</li>
+          <li>Some will imitate trusted services and teams</li>
+          <li>Compare messages with earlier emails and carefully analyze sender identity</li>
+        </ul>
       </div>
 
       <div class="scenario-actions">
@@ -333,6 +340,6 @@
 
 <script src="./fishCoach.js"></script>
 <script src="./level5Data.js"></script>
-<script src="./levelBase.js"></script>
+<script src="./levelBase5.js"></script>
 </body>
 </html>
