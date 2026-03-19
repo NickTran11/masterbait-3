@@ -1176,8 +1176,8 @@ html, body{
 .comments-popup{
   position:absolute;
   top:0;
-  left:600px;
-  width:330px;
+  left:550px;
+  width:340px;
   height:620px;
   background:#fff;
   border:1px solid #e5e7eb;
