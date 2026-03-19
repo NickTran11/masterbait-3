@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let waitingForProof = false;
   const completedMessages = new Set();
   let levelCompleted = false;
+  let wrongAnswerCount = 0;
 
   function currentMessageNeedsVerification() {
   return !!(
@@ -68,6 +69,13 @@ function finishCurrentMessage() {
 
 function allMessagesCompleted() {
   return completedMessages.size === data.messages.length;
+}
+
+function getGoldenRodsEarned() {
+  if (wrongAnswerCount === 0) return 3;
+  if (wrongAnswerCount === 1) return 2;
+  if (wrongAnswerCount === 2) return 1;
+  return 0;
 }
 
 function showLevelCompleteCoach() {
@@ -107,8 +115,9 @@ function showLevelCompleteCoach() {
   const verifySubmitBtn = document.getElementById("verifySubmitBtn");
 
   if (verificationPrompt) {
-    verificationPrompt.textContent =
-      "Review complete. Score: 0 / 3 Golden Rods";
+    const goldenRods = getGoldenRodsEarned();
+verificationPrompt.textContent =
+  `Review complete. Score: ${goldenRods} / 3 Golden Rods`;
   }
 
   if (verificationInput) {
@@ -343,6 +352,7 @@ function showLevelCompleteCoach() {
   return;
 }
 
+    wrongAnswerCount += 1;
     addClue("Incorrect action chosen. Re-check sender details, urgency language, and the previewed link.");
     setDecisionFeedback("bad", "That action is risky. Reveal another hint and try again.");
     showCoach("bad", false);
