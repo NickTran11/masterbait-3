@@ -363,26 +363,41 @@ function renderCreatorProfile() {
   if (creatorProfileLink) creatorProfileLink.textContent = profile.link;
 
   if (creatorProfileGrid) {
-    creatorProfileGrid.innerHTML = "";
-    profile.grid.forEach(src => {
-  let element;
+  creatorProfileGrid.innerHTML = "";
 
-  if (src.endsWith(".mov") || src.endsWith(".mp4")) {
-    element = document.createElement("video");
-    element.src = src;
-    element.autoplay = true;
-    element.loop = true;
-    element.muted = true;
-    element.playsInline = true;
+  if (profile.handle === "thorus_canva.official") {
+    creatorProfileGrid.classList.add("thorus-grid");
   } else {
-    element = document.createElement("img");
-    element.src = src;
+    creatorProfileGrid.classList.remove("thorus-grid");
   }
 
-  element.className = "creator-grid-item";
-  creatorProfileGrid.appendChild(element);
-});
-  }
+  profile.grid.forEach((src, index) => {
+    let element;
+
+    if (src.endsWith(".mov") || src.endsWith(".mp4")) {
+      element = document.createElement("video");
+      element.src = src;
+      element.autoplay = true;
+      element.loop = true;
+      element.playsInline = true;
+      element.controls = true;
+
+      // Thorus post 1 should have sound
+      if (profile.handle === "thorus_canva.official" && index === 0) {
+        element.muted = false;
+      } else {
+        element.muted = true;
+      }
+    } else {
+      element = document.createElement("img");
+      element.src = src;
+      element.alt = "Creator post";
+    }
+
+    element.className = "creator-grid-item";
+    creatorProfileGrid.appendChild(element);
+  });
+}
 }
   
   function renderHints() {
