@@ -1533,3 +1533,23 @@ html, body{
   height: 100%;
   object-fit: cover;
 }
+
+.creator-profile-grid.thorus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  align-items: start;
+}
+
+.creator-profile-grid.thorus-grid .creator-grid-item {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  background: #f3f4f6;
+  display: block;
+}
+
+.creator-profile-grid.thorus-grid img.creator-grid-item,
+.creator-profile-grid.thorus-grid video.creator-grid-item {
+  border-radius: 0;
+}
