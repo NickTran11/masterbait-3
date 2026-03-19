@@ -1561,28 +1561,15 @@ html, body{
 
 .ig-message-image {
   display: block;
-  width: 220px;
-  max-width: 100%;
-  height: auto;
-  border-radius: 14px;
-  cursor: pointer;
-}
-
-.ig-message-image-wrap {
-  display: block;
-  width: 100%;
-}
-
-.ig-message-image {
-  display: block;
   width: 100%;
   height: auto;
   border-radius: 12px;
+  cursor: pointer;
 }
 
 .ig-message-image-qr {
   width: 260px;
-  max-width: min(260px, 100%);
+  max-width: 100%;
   image-rendering: auto;
 }
 
