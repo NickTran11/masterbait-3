@@ -35,7 +35,6 @@ const creatorFollowingCount = document.getElementById("creatorFollowingCount");
 const creatorProfileCategory = document.getElementById("creatorProfileCategory");
 const creatorProfileBio = document.getElementById("creatorProfileBio");
 const creatorProfileLink = document.getElementById("creatorProfileLink");
-const creatorProfileHighlights = document.getElementById("creatorProfileHighlights");
 const creatorProfileGrid = document.getElementById("creatorProfileGrid");
 const postMeta = document.getElementById("postMeta");
 const postCaption = document.getElementById("postCaption");
