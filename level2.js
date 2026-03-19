@@ -187,12 +187,14 @@ const reels = [
       video.src = reel.src;
       video.autoplay = true;
       video.muted = true;
-      video.loop = true;
-      video.playsInline = true;
-      video.preload = "auto";
-      video.setAttribute("playsinline", "true");
-      video.setAttribute("webkit-playsinline", "true");
+video.loop = true;
+video.playsInline = true;
+video.preload = "auto";
+video.setAttribute("webkit-playsinline", "true");
+video.setAttribute("playsinline", "true");
 
+video.src = reel.src
+      
       const soundBtn = document.createElement("button");
       soundBtn.className = "reel-sound-btn";
       soundBtn.type = "button";
