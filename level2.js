@@ -258,9 +258,8 @@ video.preload = "auto";
 video.setAttribute("webkit-playsinline", "true");
 video.setAttribute("playsinline", "true");
 
-video.src = reel.src
-      
-      const soundBtn = document.createElement("button");
+video.src = reel.src;
+const soundBtn = document.createElement("button");
       soundBtn.className = "reel-sound-btn";
       soundBtn.type = "button";
       soundBtn.textContent = "🔇";
