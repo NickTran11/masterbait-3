@@ -81,7 +81,7 @@ const reels = [
     accountName: "thorus_canva.official",
     meta: "1.3M views · Mar 16, 2026",
     caption: "All my courses are 25% OFF this week 🔥 BUY NOW BEFORE SOLD OUT 🎯",
-    bio: "Investigate the creator page and their courses integrity"
+    bio: "Investigate the creator page and their courses integrity",
     likes: "1.1M",
     commentCount: "14k",
     comments: [
@@ -99,7 +99,7 @@ const reels = [
     accountName: "cute_mootion",
     meta: "53 views · 23h ago",
     caption: "Interact and play with the reel 😝",
-    bio: "Investigate the creator page and their reel integrity"
+    bio: "Investigate the creator page and their reel integrity",
     likes: "10",
     commentCount: "4",
     comments: [
@@ -117,7 +117,7 @@ const reels = [
     accountName: "blue_bud",
     meta: "Sponsored post · 16m ago",
     caption: "Limited special offer 🥳 SHOP NOW 🛒",
-    bio: "Investigate the creator page, advertisement and product integrity"
+    bio: "Investigate the creator page, advertisement and product integrity",
     likes: "1k",
     commentCount: "206",
     comments: [
