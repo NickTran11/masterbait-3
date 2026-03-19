@@ -105,7 +105,7 @@ const reels = [
       { avatar: "P", username: "pink3matter", time: "11h", text: "Talent❌ Hardwork✅", meta: "52k likes   Reply" }
     ],
         creatorProfile: {
-      avatar: "./images/creator1-avatar.jpg",
+      avatar: "./thorusavatar.jpeg",
       handle: "thorus_canva.official",
       verified: true,
       displayName: "Thorus Canva",
@@ -116,8 +116,8 @@ const reels = [
       bio: "Day one, one day",
       link: "the-thorus-way.com",
       grid: [
-        "./images/creator1-grid1.jpg",
-        "./images/creator1-grid2.jpg",
+        "./thoruspost1.mov",
+        "./thoruspost2.jpeg",
         "./images/creator1-grid3.jpg",
       ]
     }
@@ -140,7 +140,7 @@ const reels = [
       { avatar: "S", username: "sunniepop", time: "2h", text: "What happened at the end, anyone got that same thing??", meta: "1 likes   Reply" }
     ],
     creatorProfile: {
-      avatar: "./images/creator2-avatar.jpg",
+      avatar: "./cutemootionavatar.png",
       handle: "cute_mootion",
       verified: false,
       displayName: "Cute Mootion",
@@ -151,9 +151,9 @@ const reels = [
       bio: "Short trend edits and viral remix posts ✨",
       link: "cute-mootion-vibes.net",
       grid: [
-        "./images/creator2-grid1.jpg",
-        "./images/creator2-grid2.jpg",
-        "./images/creator2-grid3.jpg",
+        "./cutemootionpost1.jpeg",
+        "./cutemootionpost2.jpeg",
+        "./cutemootionpost3.jpeg",
       ]
     }
   },
@@ -175,7 +175,7 @@ const reels = [
       { avatar: "L", username: "lulu_draws", time: "1h", text: "I will buy one", meta: "9 likes   Reply" }
     ],
     creatorProfile: {
-      avatar: "./images/creator3-avatar.jpg",
+      avatar: "./bluebudavatar.png",
       handle: "blue_bud",
       verified: false,
       displayName: "Blue Bud Store",
@@ -186,7 +186,7 @@ const reels = [
       bio: "Lifestyle deals, trending picks, daily shop drops.",
       link: "blue-bud-limited-store.com",
       grid: [
-        "./images/creator3-grid1.jpg",
+        "./reel3.png",
         "./images/creator3-grid2.jpg",
         "./images/creator3-grid3.jpg",
       ]
