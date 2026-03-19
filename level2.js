@@ -381,7 +381,7 @@ function renderCreatorProfile() {
   }
 
   element.className = "creator-grid-item";
-  gridContainer.appendChild(element);
+  creatorProfileGrid.appendChild(element);
 });
   }
 }
