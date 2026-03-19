@@ -1408,7 +1408,7 @@ html, body{
   display:grid;
   grid-template-columns:1fr 1fr 64px;
   gap:12px;
-  margin:24px 0 28px;
+  margin:24px 0 12px;
 }
 
 .creator-profile-actions button{
