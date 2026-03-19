@@ -299,12 +299,24 @@ const soundBtn = document.createElement("button");
         });
       }
     } else {
-      const img = document.createElement("img");
-      img.className = "reel-asset reel-image";
-      img.src = reel.src;
-      img.alt = "Social media reel";
-      reelSlide.appendChild(img);
-    }
+  const img = document.createElement("img");
+  img.className = "reel-asset reel-image";
+  img.src = reel.src;
+  img.alt = "Social media reel";
+  reelSlide.appendChild(img);
+
+  // Reel 3 clickable SHOP NOW circle
+  if (activeReelIndex === 2) {
+    const shopBtn = document.createElement("a");
+    shopBtn.className = "reel-shop-now-btn";
+    shopBtn.href = "https://nicktran11.github.io/youjustgothacked/index.html";
+    shopBtn.target = "_blank";
+    shopBtn.rel = "noopener noreferrer";
+    shopBtn.textContent = "SHOP NOW";
+
+    reelSlide.appendChild(shopBtn);
+  }
+}
   }
 
   if (reelChip) reelChip.textContent = reel.chip;
