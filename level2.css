@@ -1553,3 +1553,17 @@ html, body{
 .creator-profile-grid.thorus-grid video.creator-grid-item {
   border-radius: 0;
 }
+
+.ig-message-image-link {
+  display: block;
+  text-decoration: none;
+}
+
+.ig-message-image {
+  display: block;
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 14px;
+  cursor: pointer;
+}
