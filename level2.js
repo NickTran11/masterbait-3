@@ -503,22 +503,130 @@ if (closeCreatorProfileBtn && creatorProfilePopup) {
 }
 }
 
-  function openConversation(contact) {
-  if (!conversationPopup || !messagesPopup) return;
+const conversationData = {
+  haydude: {
+    name: "Best Friend",
+    avatar: "BFF",
+    messages: [
+      { who: "them", text: "Yooo heard of this guy Thorus viral recently?" },
+      { who: "me", text: "Huh who?" },
+      { who: "them", text: "Lol you will find later" },
+      { who: "them", text: "How's your FC Barcel dream going?" },
+      { who: "me", text: "Still tryna figure out way to apply, hope they reply to me soon" },
+      { who: "them", text: "I got a chat recently from someone named \"I'm just a girl\" tryna rizz me up recently lmao" },
+      { who: "me", text: "Whaa tell me more" },
+      { who: "them", text: "Bro's a truly NPC, just a troller, I blocked them yea" },
+      { who: "me", text: "Hahaha" },
+      { who: "me", text: "It's late, let's go to sleep for smarter like me lil bro" },
+      { who: "them", text: "Sureee" },
+      { who: "them", text: "Thank you bro! 🙌" }
+    ]
+  },
 
-  const contactMap = {
-    haydude: { name: "BestFriend", avatar: "BFF" },
-    david: { name: "MrLeast", avatar: "ML" },
-    understandable: { name: "FC Barcel", avatar: "B" },
-    fortnite: { name: "Fortnite Gang", avatar: "F" },
-    girl: { name: "I'm just a girl 💅", avatar: "G" },
-    jada: { name: "Mia Foxx", avatar: "MF" }
-  };
+  david: {
+    name: "MrLeast",
+    avatar: "ML",
+    messages: [
+      { who: "them", type: "link", text: "joinmrleast.com" },
+      { who: "them", text: "Wanna be in my next video? 👀" }
+    ]
+  },
 
-  const selected = contactMap[contact] || contactMap.understandable;
+  understandable: {
+    name: "FC Barcel FanPage",
+    avatar: "FB",
+    messages: [
+      { who: "me", text: "Dear FC Barcel, I am Alexiska Vanz, despite background being an online influencer, I'm secretly discipline football hustler. I've been training in my freetime with one of your side trainer Defiso Jipph, you can discuss with him about my ability. May I have an opportunity for tryout for the team?" },
+      { who: "them", text: "Thank you for reaching out. It's a pleasure to talk to you Alexiska Vanz. Here is the link to apply for tryout to our football team this season:" },
+      { who: "them", type: "link", text: "applytryout.com" },
+      { who: "them", text: "There's a little fee to it, hope to see you soon!" }
+    ]
+  },
+
+  fortnite: {
+    name: "Fortnite Gang",
+    avatar: "FG",
+    isGroup: true,
+    messages: [
+      { who: "them", sender: "Cold Snipe", text: "Free V-Bucks drop guys!" },
+      { who: "them", sender: "Cold Snipe", type: "link", text: "freevbucks.com" },
+      { who: "them", sender: "Messy Ety", text: "Wow where you find this??" },
+      { who: "them", sender: "Cold Snipe", text: "There's this guy I met on Fortnite shared it to me" },
+      { who: "them", sender: "Headshot100", text: "Idk man that's kinda sus" },
+      { who: "them", sender: "Cold Snipe", text: "Scaredy cat haha" },
+      { who: "them", sender: "Lebon Jems", text: "JACKPOT FRR!!🤑💲" }
+    ]
+  },
+
+  girl: {
+    name: "I'm just a girl",
+    avatar: "G",
+    messages: [
+      { who: "them", text: "Are you alone right now?" }
+    ]
+  },
+
+  jada: {
+    name: "Realationall",
+    avatar: "R",
+    messages: [
+      { who: "them", text: "I have a Youtube channel" },
+      { who: "them", type: "link", text: "https://www.youtube.com/@Realationall" },
+      { who: "them", text: "Let's collab a video? 😃🙀" }
+    ]
+  }
+};
+
+function renderConversation(contact) {
+  if (!conversationThread) return;
+
+  const selected = conversationData[contact] || conversationData.haydude;
 
   if (conversationName) conversationName.textContent = selected.name;
   if (conversationAvatar) conversationAvatar.textContent = selected.avatar;
+
+  conversationThread.innerHTML = "";
+
+  selected.messages.forEach((msg) => {
+    const row = document.createElement("div");
+    row.className = `ig-message-row ${msg.who === "me" ? "me" : "them"}`;
+
+    const bubble = document.createElement("div");
+    bubble.className = `ig-message-bubble ${msg.who === "me" ? "me" : "them"}`;
+
+    if (selected.isGroup && msg.sender) {
+      const sender = document.createElement("div");
+      sender.className = "ig-message-sender";
+      sender.textContent = msg.sender;
+      bubble.appendChild(sender);
+    }
+
+    if (msg.type === "link") {
+      const link = document.createElement("a");
+      link.className = "ig-message-link";
+      link.href = msg.text.startsWith("http") ? msg.text : `https://${msg.text}`;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = msg.text;
+      bubble.appendChild(link);
+    } else {
+      const text = document.createElement("div");
+      text.className = "ig-message-text";
+      text.textContent = msg.text;
+      bubble.appendChild(text);
+    }
+
+    row.appendChild(bubble);
+    conversationThread.appendChild(row);
+  });
+
+  conversationThread.scrollTop = conversationThread.scrollHeight;
+}
+
+function openConversation(contact) {
+  if (!conversationPopup || !messagesPopup) return;
+
+  renderConversation(contact);
 
   messagesPopup.classList.add("hidden");
   conversationPopup.classList.remove("hidden");
