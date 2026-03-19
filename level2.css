@@ -1580,8 +1580,8 @@ html, body{
 
 .reel-shop-now-btn {
   position: absolute;
-  top: 118px;
-  right: 18px;
+  top: 116px;
+  right: 2px;
   width: 108px;
   height: 108px;
   border-radius: 50%;
@@ -1603,11 +1603,11 @@ html, body{
 }
 
 .reel-shop-now-btn::after {
-  content: "🖱️";
+  content: "👆";
   position: absolute;
   right: 6px;
   bottom: 4px;
-  font-size: 20px;
+  font-size: 30px;
   line-height: 1;
   pointer-events: none;
 }
