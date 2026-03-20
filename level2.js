@@ -680,6 +680,49 @@ function renderTaskQuestion() {
   nextTaskBtn.classList.add("hidden");
   taskOptions.innerHTML = "";
 
+if (task.type === "counter") {
+  const min = Number.isFinite(task.min) ? task.min : 0;
+  const max = Number.isFinite(task.max) ? task.max : 99;
+  const startValue = Number.isFinite(task.startValue) ? task.startValue : min;
+
+  taskOptions.innerHTML = `
+    <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:16px;">
+      <button type="button" class="task-option-btn" data-counter-action="decrease">-</button>
+      <div id="taskCounterValue" style="min-width:88px; text-align:center; font-size:2rem; font-weight:800; padding:12px 16px; border-radius:16px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14);">
+        ${startValue}
+      </div>
+      <button type="button" class="task-option-btn" data-counter-action="increase">+</button>
+    </div>
+
+    <button type="button" class="task-option-btn" id="taskCounterSubmit">Submit Answer</button>
+  `;
+
+  const counterValueEl = taskOptions.querySelector("#taskCounterValue");
+  const decreaseBtn = taskOptions.querySelector('[data-counter-action="decrease"]');
+  const increaseBtn = taskOptions.querySelector('[data-counter-action="increase"]');
+  const submitBtn = taskOptions.querySelector("#taskCounterSubmit");
+
+  let currentValue = startValue;
+
+  const paintCounterValue = () => {
+    counterValueEl.textContent = currentValue;
+  };
+
+  decreaseBtn.addEventListener("click", () => {
+    currentValue = Math.max(min, currentValue - 1);
+    paintCounterValue();
+  });
+
+  increaseBtn.addEventListener("click", () => {
+    currentValue = Math.min(max, currentValue + 1);
+    paintCounterValue();
+  });
+
+  submitBtn.addEventListener("click", () => {
+    handleCounterTaskAnswer(currentValue);
+  });
+
+} else {
   task.options.forEach((optionText, index) => {
     const btn = document.createElement("button");
     btn.type = "button";
@@ -688,16 +731,17 @@ function renderTaskQuestion() {
     btn.addEventListener("click", () => handleTaskAnswer(index));
     taskOptions.appendChild(btn);
   });
+}
 
-  if (answered) {
-    lockTaskOptions();
-  }
+if (answered) {
+  lockTaskOptions();
+}
 
   updateTasksBadge();
 }
 
 function lockTaskOptions() {
-  taskOptions.querySelectorAll(".task-option-btn").forEach(btn => {
+  taskOptions.querySelectorAll("button").forEach(btn => {
     btn.classList.add("is-disabled");
     btn.disabled = true;
   });
@@ -738,6 +782,41 @@ function handleTaskAnswer(selectedIndex) {
   }
 }
 
+function handleCounterTaskAnswer(selectedValue) {
+  const task = level2Tasks[currentTaskIndex];
+
+  lockTaskOptions();
+
+  taskFeedback.classList.remove("hidden");
+  taskFeedback.classList.remove("correct", "wrong");
+
+  let feedbackText = "";
+
+  if (selectedValue === 0) {
+    taskFeedback.classList.add("correct");
+    feedbackText = `0 - ${task.feedbackZero}`;
+  } else if (selectedValue >= 1 && selectedValue <= 3) {
+    taskFeedback.classList.add("wrong");
+    feedbackText = `${selectedValue} - ${task.feedbackLow}`;
+  } else {
+    taskFeedback.classList.add("wrong");
+    feedbackText = `${selectedValue} - ${task.feedbackHigh}`;
+  }
+
+  taskFeedback.textContent = feedbackText;
+
+  answeredTaskIndexes.add(currentTaskIndex);
+  updateTasksBadge();
+
+  if (currentTaskIndex < level2Tasks.length - 1) {
+    nextTaskBtn.classList.remove("hidden");
+    nextTaskBtn.textContent = "Next Question";
+  } else {
+    nextTaskBtn.classList.remove("hidden");
+    nextTaskBtn.textContent = "Finish Tasks";
+  }
+}
+  
 function goToNextTask() {
   if (currentTaskIndex < level2Tasks.length - 1) {
     currentTaskIndex += 1;
