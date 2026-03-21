@@ -654,6 +654,7 @@ function closeTasksPanel() {
 }
 
 function renderTaskQuestion() {
+  nextTaskBtn.onclick = null;
   if (!taskQuestionText || !taskOptions || !taskQuestionNumber || !tasksProgressText || !tasksProgressFill) return;
 
   const task = level2Tasks[currentTaskIndex];
