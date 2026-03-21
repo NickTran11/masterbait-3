@@ -949,6 +949,18 @@ function renderStarsScreen() {
     window.location.href = "levelMap.html";
   };
 }
+
+function beginLevel2Mission() {
+  if (!scenarioOverlay) return;
+  scenarioOverlay.classList.add("hidden");
+  scenarioOverlay.setAttribute("aria-hidden", "true");
+}
+
+function openLevel2Dossier() {
+  if (!scenarioOverlay) return;
+  scenarioOverlay.classList.remove("hidden");
+  scenarioOverlay.setAttribute("aria-hidden", "false");
+}
   
   function bindScenarioButtons() {
     if (beginMissionBtn && scenarioOverlay) {
