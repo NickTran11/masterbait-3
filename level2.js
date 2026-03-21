@@ -1006,15 +1006,19 @@ function showScoreFishCoachFeedback() {
 if (window.showFishCoachCustom) {
   window.showFishCoachCustom({
     title: payload.title,
-    body: `${payload.body}\n\n• ${payload.tips.join("\n• ")}`
+    bubble: payload.body,
+    lessons: payload.tips
   });
 }
 
-  if (window.setFishCoachCloseHandler) {
-    window.setFishCoachCloseHandler(() => {
-      renderStarsScreen();
-    });
-  }
+ if (window.setFishCoachCloseHandler) {
+  window.setFishCoachCloseHandler(() => {
+    if (window.closeFishCoachCustom) {
+      window.closeFishCoachCustom();
+    }
+    renderStarsScreen();
+  });
+}
 }
   
 function renderStarsScreen() {
