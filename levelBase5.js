@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let waitingForProof = false;
   const completedMessages = new Set();
   let levelCompleted = false;
+  let levelFailed = false;
   let wrongAnswerCount = 0;
 
   function currentMessageNeedsVerification() {
@@ -169,6 +170,60 @@ verificationPrompt.textContent =
     });
   }
 }, 50);
+}
+
+function showLevelFailedCoach() {
+  levelFailed = true;
+  waitingForProof = false;
+
+  hideProofBox();
+
+  const title = "Level Failed";
+  const lessons = [
+    "You made too many risky choices in this level.",
+    "Spear phishing works when attackers use trust, urgency, and familiar context to lower your guard.",
+    "Take another look at sender domains, repeated themes, and cross-email clues before acting.",
+    "Restart the level and try again."
+  ];
+
+  if (window.showFishCoachCustom) {
+    window.showFishCoachCustom({
+      title,
+      bubble: "",
+      lessons
+    });
+  }
+
+  if (verificationPrompt) {
+    verificationPrompt.textContent = "Too many wrong answers. Restart required.";
+  }
+
+  if (proofBox) {
+    proofBox.classList.remove("hidden");
+  }
+
+  if (verificationInput) {
+    verificationInput.style.display = "none";
+  }
+
+  if (verificationHelp) {
+    verificationHelp.textContent = "Use the inbox clues more carefully on your next attempt.";
+  }
+
+  if (verifySubmitBtn) {
+    verifySubmitBtn.style.display = "none";
+  }
+
+  if (verificationResult) {
+    verificationResult.textContent = "You reached the failure limit of 4 incorrect answers.";
+    verificationResult.className = "proof-result bad";
+  }
+
+  if (window.setFishCoachCloseHandler) {
+    window.setFishCoachCloseHandler(() => {
+      window.location.href = "./level5.html";
+    });
+  }
 }
 
   function init() {
@@ -360,8 +415,11 @@ item.innerHTML = `
   }
 
   function handleAction(action) {
+    if (levelFailed || levelCompleted) return;
+
     const isCorrect = action === activeMessage.correctAction;
     const isPartial = action === activeMessage.partialAction;
+    
 
     if (isCorrect) {
   const needsProof = currentMessageNeedsVerification();
@@ -386,6 +444,12 @@ item.innerHTML = `
 }
 
     wrongAnswerCount += 1;
+
+    if (wrongAnswerCount >= 4) {
+  setDecisionFeedback("bad", "Too much bait taken. Level failed.");
+  showLevelFailedCoach();
+  return;
+}
     addClue("Incorrect action chosen. Re-check sender details, urgency language, and the previewed link.");
     setDecisionFeedback("bad", "That action is risky. Reveal another hint and try again.");
     showCoach("bad", false);
