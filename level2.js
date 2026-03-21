@@ -213,6 +213,9 @@ const reels = [
   let retryCount = 0;
   let waitingForProof = false;
 
+  let taskAnswers = new Array(level2Tasks.length).fill(null);
+let finalScore = 0;
+
 const level2Tasks = [
   {
     question: "Look at the thorus_canva.official creator page. Can we trust him based only on a high number of followers and a verified badge?",
