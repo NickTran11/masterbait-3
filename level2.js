@@ -783,7 +783,7 @@ taskAnswers[currentTaskIndex] = selectedValue;
     nextTaskBtn.textContent = "Next Question";
   } else {
     nextTaskBtn.classList.remove("hidden");
-    nextTaskBtn.textContent = "Finish Tasks";
+    nextTaskBtn.textContent = "See Scores";
   }
 }
 
@@ -820,7 +820,7 @@ taskAnswers[currentTaskIndex] = selectedValue;
     nextTaskBtn.textContent = "Next Question";
   } else {
     nextTaskBtn.classList.remove("hidden");
-    nextTaskBtn.textContent = "Finish Tasks";
+    nextTaskBtn.textContent = "See Scores";
   }
 }
   
@@ -829,7 +829,7 @@ function goToNextTask() {
     currentTaskIndex += 1;
     renderTaskQuestion();
   } else {
-    closeTasksPanel();
+    renderScoreSummary();
   }
 }
 
