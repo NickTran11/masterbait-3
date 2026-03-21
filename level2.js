@@ -753,19 +753,19 @@ function lockTaskOptions() {
 function handleTaskAnswer(selectedIndex) {
   const task = level2Tasks[currentTaskIndex];
   const optionButtons = [...taskOptions.querySelectorAll(".task-option-btn")];
-  const isCorrect = selectedIndex === task.correctIndex;
+  const correctIndexes = Array.isArray(task.correctIndex) ? task.correctIndex : [task.correctIndex];
+const isCorrect = correctIndexes.includes(selectedIndex);
 
   optionButtons.forEach((btn, index) => {
     btn.disabled = true;
     btn.classList.add("is-disabled");
 
-    if (index === task.correctIndex) {
-      btn.classList.add("is-correct");
-    }
-
-    if (index === selectedIndex && index !== task.correctIndex) {
-      btn.classList.add("is-wrong");
-    }
+    if (correctIndexes.includes(index)) {
+  btn.classList.add("is-correct");
+}
+if (index === selectedIndex && !correctIndexes.includes(index)) {
+  btn.classList.add("is-wrong");
+}
   });
 
   taskFeedback.classList.remove("hidden");
@@ -869,11 +869,13 @@ function calculateFinalScore() {
   let score = 0;
 
   for (let i = 0; i < 13; i++) {
-    const task = level2Tasks[i];
-    if (taskAnswers[i] === task.correctIndex) {
-      score += 1;
-    }
+  const task = level2Tasks[i];
+  const correctIndexes = Array.isArray(task.correctIndex) ? task.correctIndex : [task.correctIndex];
+
+  if (correctIndexes.includes(taskAnswers[i])) {
+    score += 1;
   }
+}
 
   const q14 = Number(taskAnswers[13] ?? 0);
 
@@ -909,8 +911,9 @@ function renderScoreSummary() {
   taskHintBox.classList.remove("hidden");
   taskHintBox.innerHTML = `
     ${level2Tasks.slice(0,13).map((t,i)=>{
-      return `Q${i+1}: ${taskAnswers[i] === t.correctIndex ? "Correct ✅" : "Wrong ❌"}`
-    }).join("<br>")}
+  const correctIndexes = Array.isArray(t.correctIndex) ? t.correctIndex : [t.correctIndex];
+  return `Q${i+1}: ${correctIndexes.includes(taskAnswers[i]) ? "Correct ✅" : "Wrong ❌"}`
+}).join("<br>")}
     <br><br>${getQuestion14ScoreText()}
   `;
 
@@ -961,6 +964,18 @@ function renderStarsScreen() {
 
   taskHintBox.classList.add("hidden");
   taskFeedback.classList.add("hidden");
+
+  const tasksHeader = document.querySelector(".tasks-header");
+const tasksIntro = document.querySelector(".tasks-intro");
+const tasksProgress = document.querySelector(".tasks-progress");
+const tasksFooter = document.querySelector(".tasks-footer");
+const backToFeedBtn = document.getElementById("exitTasksBtn");
+
+if (tasksHeader) tasksHeader.classList.add("hidden");
+if (tasksIntro) tasksIntro.classList.add("hidden");
+if (tasksProgress) tasksProgress.classList.add("hidden");
+if (tasksFooter) tasksFooter.classList.add("hidden");
+if (backToFeedBtn) backToFeedBtn.classList.add("hidden");
 
   taskOptions.innerHTML = `
     <div class="stars-final-screen ${themeClass}">
