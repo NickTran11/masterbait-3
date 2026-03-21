@@ -63,6 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function finishCurrentMessage() {
   completedMessages.add(activeMessage.id);
 
+  updateInboxCount();
+
   renderMessageList();
 
   if (allMessagesCompleted() && !levelCompleted) {
@@ -215,7 +217,7 @@ function showLevelFailedCoach() {
   }
 
   if (verificationResult) {
-    verificationResult.textContent = "You reached the failure limit of 4 incorrect answers.";
+    verificationResult.textContent = "You reached the failure limit of 3 incorrect answers.";
     verificationResult.className = "proof-result bad";
   }
 
@@ -226,6 +228,22 @@ function showLevelFailedCoach() {
   }
 }
 
+
+function updateInboxCount() {
+  const totalMessages = data.messages.length;
+  const remaining = totalMessages - completedMessages.size;
+
+  const inboxCountFav = document.getElementById("inbox-count-fav");
+  const inboxCountAcc = document.getElementById("inbox-count-acc");
+
+  if (inboxCountFav) {
+    inboxCountFav.textContent = remaining;
+  }
+
+  if (inboxCountAcc) {
+    inboxCountAcc.textContent = remaining;
+  }
+}
   function init() {
     renderScenario();
     renderMessageList();
@@ -445,7 +463,7 @@ item.innerHTML = `
 
     wrongAnswerCount += 1;
 
-    if (wrongAnswerCount >= 4) {
+    if (wrongAnswerCount >= 3) {
   setDecisionFeedback("bad", "Too much bait taken. Level failed.");
   showLevelFailedCoach();
   return;
