@@ -212,8 +212,6 @@ const reels = [
   let revealedHintCount = 0;
   let retryCount = 0;
   let waitingForProof = false;
-
-  let taskAnswers = new Array(level2Tasks.length).fill(null);
 let finalScore = 0;
 
 const level2Tasks = [
@@ -372,6 +370,7 @@ const level2Tasks = [
   feedbackHigh: "Oh no! Check and verify all sources before enter any link, your device needs to be safe!"
 }
 ];
+  let taskAnswers = new Array(level2Tasks.length).fill(null);
 
 let currentTaskIndex = 0;
 const answeredTaskIndexes = new Set();
