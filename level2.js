@@ -935,10 +935,88 @@ function renderScoreSummary() {
     </div>
   `;
 
-  nextTaskBtn.textContent = "Next";
-  nextTaskBtn.onclick = renderStarsScreen;
+  nextTaskBtn.textContent = "See Feedback";
+  nextTaskBtn.onclick = showScoreFishCoachFeedback;
 }
 
+function getScoreFeedbackPayload(score) {
+  if (score <= 3) {
+    return {
+      title: "Fish Coach Feedback",
+      body: "Whoa… you got baited a lot. Don’t worry — this is how we learn. Slow down before clicking anything online.",
+      tips: [
+        "Pause before clicking links in DMs, comments, or reels.",
+        "Do not trust messages just because they sound friendly or urgent.",
+        "Watch for red flags like weird usernames, pressure, and fake rewards.",
+        "Never type your password or personal info into random links.",
+        "If you are not sure, verify first from an official source."
+      ],
+      mood: "bad"
+    };
+  }
+
+  if (score <= 9) {
+    return {
+      title: "Fish Coach Feedback",
+      body: "Nice try! You caught some traps, but a few still slipped through. Let’s sharpen your scam radar.",
+      tips: [
+        "Double-check links before opening them.",
+        "Be careful with giveaways, free rewards, and collab offers.",
+        "Even messages from friends can be fake if their account was hacked.",
+        "Do not trust random comments or influencer hype alone.",
+        "When something feels suspicious, stop and verify."
+      ],
+      mood: "warn"
+    };
+  }
+
+  if (score <= 15) {
+    return {
+      title: "Fish Coach Feedback",
+      body: "Great job! You are thinking carefully and spotting most traps. Keep building safe habits.",
+      tips: [
+        "Verify accounts through official websites or trusted pages.",
+        "Check usernames, links, and comment patterns for clues.",
+        "Do not let fear of missing out rush your decisions.",
+        "Be cautious with shortened links and fake login pages.",
+        "Smart users verify before they trust."
+      ],
+      mood: "good"
+    };
+  }
+
+  return {
+    title: "Fish Coach Feedback",
+    body: "Perfect! You stayed sharp and avoided every bait. You are thinking like a real scam detector.",
+    tips: [
+      "Keep verifying links and profiles before trusting them.",
+      "Stay alert because scams keep changing.",
+      "Help friends and family spot phishing and fake social media tricks.",
+      "Do not rely only on badges, followers, or comments.",
+      "Safe habits beat social engineering."
+    ],
+    mood: "great"
+  };
+}
+
+function showScoreFishCoachFeedback() {
+  const score = finalScore;
+  const payload = getScoreFeedbackPayload(score);
+
+if (window.showFishCoachCustom) {
+  window.showFishCoachCustom({
+    title: payload.title,
+    body: `${payload.body}\n\n• ${payload.tips.join("\n• ")}`
+  });
+}
+
+  if (window.setFishCoachCloseHandler) {
+    window.setFishCoachCloseHandler(() => {
+      renderStarsScreen();
+    });
+  }
+}
+  
 function renderStarsScreen() {
   const stars = getStarsFromScore(finalScore);
 
