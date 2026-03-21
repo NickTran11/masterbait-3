@@ -25,19 +25,19 @@ window.LEVEL2_EMAIL = {
       dmLink: "creator-prize-access.com/claim",
       commentCount: "14k",
       inspector: {
-        username: "thorus_canva.official",
-        profileAge: "2 days old",
-        linkInBio: "prize-claim-fast.net/winner"
+        username: "Click the username of the reel creator to check their creator page",
+        profileAge: "Check each reel comments",
+        linkInBio: "Check the messages at bottom right"
       },
 
       correctAction: "report",
       partialAction: "verify",
 
       orderedHints: [
-        "The account looks popular at first glance, but the username is generic and the profile is very new.",
-        "The reel uses urgency: 'last 100 winners only' and 'claim now'. Pressure is a common scam tactic.",
-        "The DM and the reel both push you toward outside links instead of an official verified profile.",
-        "The safest move is to report the suspicious content and verify the creator from an official, verified account or website."
+        "Interactive reel does really interact, don't fall for it!",
+        "Only some reel comments are useful.",
+        "Clickable or non-clickable? Watch out!",
+        "Messages from Best Friend is a game changer!"
       ],
 
       verification: {
