@@ -278,8 +278,10 @@ if (starsContinueBtn) {
     }
   }
 
-  function handleAction(action) {
-    const isCorrect = action === activeMessage.correctAction;
+function handleAction(action) {
+  selectedAction = action;
+
+  const isCorrect = action === activeMessage.correctAction;
     const isPartial = action === activeMessage.partialAction;
 
     if (isCorrect) {
