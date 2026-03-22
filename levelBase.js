@@ -40,6 +40,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const verificationInput = document.getElementById("verificationInput");
   const verificationHelp = document.getElementById("verificationHelp");
   const verificationResult = document.getElementById("verificationResult");
+  const starsOverlay = document.getElementById("starsOverlay");
+const starsRow = document.getElementById("starsRow");
+const starsText = document.getElementById("starsText");
+const starsContinueBtn = document.getElementById("starsContinueBtn");
   const verifySubmitBtn = document.getElementById("verifySubmitBtn");
 
   const clueSet = new Set();
@@ -47,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let revealedHintCount = 0;
   let retryCount = 0;
   let waitingForProof = false;
+  let selectedAction = null;
 
   function init() {
     renderScenario();
