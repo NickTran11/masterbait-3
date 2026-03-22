@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="./fishCoach.css" />
 </head>
 <body>
-  <!-- ===================== DOSSIER / SCENARIO INTRO ===================== -->
   <div id="scenarioOverlay" class="scenario-overlay" aria-hidden="false">
     <div class="scenario-card">
       <div class="paperclip" aria-hidden="true"></div>
@@ -32,7 +31,7 @@
         <div class="meta-row">
           <span class="meta-label">DESCRIPTION:</span>
           <span class="meta-value" id="scenarioDescription">
-            You are Theo Buch, checking your email in your office and receive an urgent email about abc.
+            You are Theo Buch. Earlier, you received a normal invoice update email. Later, you receive clone phishing emails that copy the same style but use slightly changed sender domains and malicious links.
           </span>
         </div>
       </div>
@@ -43,17 +42,18 @@
         <div class="scenario-column">
           <div class="scenario-section-title">PROFILE</div>
           <ul id="scenarioProfile" class="scenario-list">
-            <li>Active on social media</li>
-            <li>Love shopping, makeup and boyfriend</li>
-            <li>Online shopping on Amazon a lot</li>
+            <li>Works in a Microsoft office environment</li>
+            <li>Receives vendor invoices and update emails</li>
+            <li>Checks email quickly during busy work hours</li>
           </ul>
         </div>
 
         <div class="scenario-column">
           <div class="scenario-section-title">HABITS</div>
           <ul id="scenarioHabits" class="scenario-list">
-            <li>Allow any cookie data that pops up</li>
-            <li>Use discount, gift card, reward to buy things</li>
+            <li>Often opens email updates immediately</li>
+            <li>May trust familiar-looking invoice messages</li>
+            <li>Can overlook tiny sender-domain changes when rushed</li>
           </ul>
         </div>
       </div>
@@ -63,7 +63,7 @@
       <div class="scenario-context">
         <div class="scenario-section-title">MISSION CONTEXT</div>
         <p id="scenarioContext">
-          Your goal is to decide whether this email is legitimate or a phishing attempt. Inspect the sender, message tone, and the real destination of the link before acting.
+          Level 4 introduces clone phishing. One email is legitimate, while two emails imitate the same style with slightly changed domains or malicious links. Compare the sender domain, link destination, and message context carefully before acting.
         </p>
       </div>
 
@@ -73,7 +73,6 @@
     </div>
   </div>
 
-  <!-- ===================== MAIN LEVEL ===================== -->
   <div id="levelShell" class="level-shell">
     <header class="mail-topbar">
       <div class="top-left">
@@ -114,14 +113,14 @@
 
       <aside class="folder-pane">
         <div class="folder-header">Favorites</div>
-        <div class="folder-item active">Inbox <span class="count">1</span></div>
+        <div class="folder-item active" id="inboxFolder">Inbox <span class="count" id="inboxCount">0</span></div>
         <div class="folder-item">Sent Items</div>
         <div class="folder-item">Drafts</div>
         <div class="folder-item">Deleted Items</div>
-        <div class="folder-item">Junk Email</div>
+        <div class="folder-item" id="junkFolder">Junk Email <span class="count" id="junkCount">0</span></div>
         <div class="folder-item">Archive</div>
 
-        <div class="folder-header mt">sophieblue133@email.com</div>
+        <div class="folder-header mt" id="accountEmailLabel">theobuch@email.com</div>
         <div class="folder-item active">Inbox <span class="count">1</span></div>
         <div class="folder-item">Drafts</div>
         <div class="folder-item">Sent Items</div>
@@ -129,7 +128,7 @@
 
       <section class="message-list-pane">
         <div class="list-header">
-          <div class="list-title">Inbox</div>
+          <div class="list-title" id="listTitle">Inbox</div>
           <div class="list-tools">⟲ ⤢ ⌕</div>
         </div>
 
@@ -142,19 +141,19 @@
 
         <div class="reading-meta">
           <div class="sender-row">
-            <div class="avatar" id="senderAvatar">AM</div>
+            <div class="avatar" id="senderAvatar">MB</div>
 
             <div class="sender-meta">
               <div class="sender-name-line">
-                <span class="sender-name suspicious" id="fromName">Microsoft Center</span>
-                <span class="sender-address suspicious" id="fromEmail">&lt;offers@microsoft-center-mail.com&gt;</span>
+                <span class="sender-name suspicious" id="fromName">Microsoft Billing Center</span>
+                <span class="sender-address suspicious" id="fromEmail">&lt;invoice-update@rnicrosoft-billing.com&gt;</span>
               </div>
               <div class="to-line">
                 To: <span id="toEmail">Theo Buch</span>
               </div>
             </div>
 
-            <div class="reading-time" id="emailTime">Sun 3/15/2026 9:52 PM</div>
+            <div class="reading-time" id="emailTime">Mon 3/16/2026 9:12 AM</div>
           </div>
         </div>
 
@@ -174,30 +173,15 @@
           <div class="email-card">
             <div class="email-brand-bar"></div>
 
-            <div class="email-body">
-              <div class="email-logo">Amazon Logo</div>
+            <div class="email-body" id="emailBody">
+              <div class="email-logo">Microsoft Billing Center</div>
 
               <p>Hello Theo Buch,</p>
 
-              <p>
-                Congratulations! You have been selected as one of today’s lucky Amazon customers.
-                You are eligible to claim a
-                <span class="suspicious hintable">$100 gift card</span>
-                if you confirm your account now.
-              </p>
+              <p>This area will be populated by level4Data.js.</p>
 
               <p>
-                We only have a few claim spots left today, so please act quickly before your reward expires.
-              </p>
-
-              <p>
-                To confirm your eligibility, click
-                <a href="#" class="email-link hintable suspicious" id="accountLink">Claim Reward</a>.
-              </p>
-
-              <p>
-                Thank you,<br>
-                Amazon Rewards Team
+                <a href="#" class="email-link hintable suspicious" id="accountLink">Open message</a>
               </p>
             </div>
 
@@ -210,23 +194,17 @@
           <div class="inspector-grid">
             <div class="inspector-item">
               <div class="inspector-label">Return-Path</div>
-              <div class="inspector-value suspicious hintable">
-                bounce-4801@mailer.amazon-claim-notice.net
-              </div>
+              <div class="inspector-value suspicious hintable"></div>
             </div>
 
             <div class="inspector-item">
               <div class="inspector-label">Reply-To</div>
-              <div class="inspector-value suspicious hintable">
-                support@amazon-prize-claims-help.com
-              </div>
+              <div class="inspector-value suspicious hintable"></div>
             </div>
 
             <div class="inspector-item">
               <div class="inspector-label">Link Preview</div>
-              <div class="inspector-value suspicious hintable">
-                https://amazon-gift-claim-center.com/reward/confirm
-              </div>
+              <div class="inspector-value suspicious hintable"></div>
             </div>
           </div>
         </section>
@@ -256,7 +234,7 @@
               <div class="action-icon">📞</div>
               <div class="action-copy">
                 <div class="action-name">Verify officially</div>
-                <div class="action-desc">Use Amazon’s real website or official support</div>
+                <div class="action-desc">Use Microsoft’s real website or official support</div>
               </div>
             </button>
 
@@ -264,7 +242,7 @@
               <div class="action-icon">🔗</div>
               <div class="action-copy">
                 <div class="action-name">Click the link</div>
-                <div class="action-desc">Open the message link "Claim Reward" directly</div>
+                <div class="action-desc">Open the message link directly</div>
               </div>
             </button>
 
@@ -330,32 +308,32 @@
     </div>
   </div>
 
-<script>
-  function beginLevelMission() {
-    const overlay = document.getElementById("scenarioOverlay");
-    if (!overlay) return;
+  <script>
+    function beginLevelMission() {
+      const overlay = document.getElementById("scenarioOverlay");
+      if (!overlay) return;
 
-    overlay.style.opacity = "0";
-    overlay.style.transition = "opacity 0.25s ease";
+      overlay.style.opacity = "0";
+      overlay.style.transition = "opacity 0.25s ease";
 
-    setTimeout(() => {
-      overlay.style.display = "none";
-      overlay.setAttribute("aria-hidden", "true");
-    }, 250);
-  }
+      setTimeout(() => {
+        overlay.style.display = "none";
+        overlay.setAttribute("aria-hidden", "true");
+      }, 250);
+    }
 
-  function openLevelDossier() {
-    const overlay = document.getElementById("scenarioOverlay");
-    if (!overlay) return;
+    function openLevelDossier() {
+      const overlay = document.getElementById("scenarioOverlay");
+      if (!overlay) return;
 
-    overlay.style.display = "grid";
-    overlay.style.opacity = "1";
-    overlay.setAttribute("aria-hidden", "false");
-  }
-</script>
+      overlay.style.display = "grid";
+      overlay.style.opacity = "1";
+      overlay.setAttribute("aria-hidden", "false");
+    }
+  </script>
 
-<script src="./fishCoach.js"></script>
-<script src="./level4Data.js"></script>
-<script src="./levelBase4.js"></script>
+  <script src="./fishCoach.js"></script>
+  <script src="./level4Data.js"></script>
+  <script src="./levelBase4.js"></script>
 </body>
 </html>
