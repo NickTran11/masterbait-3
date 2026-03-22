@@ -31,7 +31,7 @@
         <div class="meta-row">
           <span class="meta-label">DESCRIPTION:</span>
           <span class="meta-value" id="scenarioDescription">
-            You are Theo Buch. Earlier, you received a normal invoice update email. Later, you receive clone phishing emails that copy the same style but use slightly changed sender domains and malicious links.
+            You are Theo Buch. Level 4 introduces clone phishing. Some emails are legitimate workplace messages, while others copy familiar formatting but use slightly changed domains, reply-style subjects, or swapped malicious links.
           </span>
         </div>
       </div>
@@ -43,17 +43,17 @@
           <div class="scenario-section-title">PROFILE</div>
           <ul id="scenarioProfile" class="scenario-list">
             <li>Works in a Microsoft office environment</li>
-            <li>Receives vendor invoices and update emails</li>
-            <li>Checks email quickly during busy work hours</li>
+            <li>Receives invoices, document shares, Teams notices, and IT alerts</li>
+            <li>Often reviews email quickly during busy work hours</li>
           </ul>
         </div>
 
         <div class="scenario-column">
           <div class="scenario-section-title">HABITS</div>
           <ul id="scenarioHabits" class="scenario-list">
-            <li>Often opens email updates immediately</li>
-            <li>May trust familiar-looking invoice messages</li>
-            <li>Can overlook tiny sender-domain changes when rushed</li>
+            <li>Checks email between meetings</li>
+            <li>May trust familiar branding and reply-style subjects</li>
+            <li>Can miss tiny domain differences when rushed</li>
           </ul>
         </div>
       </div>
@@ -63,7 +63,7 @@
       <div class="scenario-context">
         <div class="scenario-section-title">MISSION CONTEXT</div>
         <p id="scenarioContext">
-          Level 4 introduces clone phishing. One email is legitimate, while two emails imitate the same style with slightly changed domains or malicious links. Compare the sender domain, link destination, and message context carefully before acting.
+          Your goal is to compare sender domain, reply-to address, link destination, urgency, and message context. Not every email in Junk is malicious, and not every email in Inbox is safe. Clone phishing works by imitating messages that look normal.
         </p>
       </div>
 
@@ -121,7 +121,7 @@
         <div class="folder-item">Archive</div>
 
         <div class="folder-header mt" id="accountEmailLabel">theobuch@email.com</div>
-        <div class="folder-item active">Inbox <span class="count">1</span></div>
+        <div class="folder-item active">Inbox <span class="count" id="mailboxInboxCount">0</span></div>
         <div class="folder-item">Drafts</div>
         <div class="folder-item">Sent Items</div>
       </aside>
@@ -175,13 +175,10 @@
 
             <div class="email-body" id="emailBody">
               <div class="email-logo">Microsoft Billing Center</div>
-
               <p>Hello Theo Buch,</p>
-
-              <p>This area will be populated by level4Data.js.</p>
-
+              <p>This area will be replaced by level4Data.js.</p>
               <p>
-                <a href="#" class="email-link hintable suspicious" id="accountLink">Open message</a>
+                <a href="#" class="email-link hintable suspicious">Open message</a>
               </p>
             </div>
 
@@ -289,10 +286,12 @@
           <div class="proof-title">Proof of understanding</div>
           <div id="verificationPrompt" class="proof-text"></div>
 
-          <input id="verificationInput"
-                 class="proof-input"
-                 type="text"
-                 placeholder="Type the safe official domain here" />
+          <input
+            id="verificationInput"
+            class="proof-input"
+            type="text"
+            placeholder="Type the safe official domain here"
+          />
 
           <div id="verificationHelp" class="proof-help"></div>
 
