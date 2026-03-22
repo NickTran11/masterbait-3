@@ -379,6 +379,9 @@ function handleAction(action) {
   });
 }
 
+      return;
+    }
+
     const guidanceList = activeMessage.verification.retryGuidance || [];
     const guidance = guidanceList[Math.min(retryCount, guidanceList.length - 1)] || "Try again.";
     retryCount += 1;
